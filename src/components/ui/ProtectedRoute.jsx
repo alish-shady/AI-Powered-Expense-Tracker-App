@@ -1,0 +1,31 @@
+import { useNavigate } from "react-router";
+import { useUser } from "../../features/profile/hooks/useUser";
+import { useEffect } from "react";
+
+export default function ProtectedRoute({ children }) {
+  const { user, isLoading } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && user?.role !== "authenticated") {
+      navigate("/login", { replace: true });
+    }
+  }, [user, isLoading, navigate]);
+
+  if (isLoading) {
+    return (
+      <div className="animate-custom-pulse bg-three flex h-screen w-full items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <h1 className="text-one/60 text-xl">LOGO</h1>
+          <p className="text-one/60 text-sm font-medium">
+            Loading your account...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (user?.role === "authenticated") return children;
+
+  return null;
+}
