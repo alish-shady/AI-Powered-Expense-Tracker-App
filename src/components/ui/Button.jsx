@@ -14,6 +14,7 @@ export default function Button({
     filled: "bg-one text-white hover:bg-one/90 active:scale-98",
     outline: "border-2 border-one text-one hover:bg-one/10 active:scale-98",
     ghost: "text-one hover:bg-one/10",
+    none: "",
   };
 
   const sizes = {

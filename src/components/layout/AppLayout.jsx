@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 
 export default function AppLayout({ children }) {
   return (
-    <div className="flex h-screen w-full flex-col overflow-hidden bg-three">
+    <div className="bg-three flex h-screen w-full flex-col overflow-hidden">
       {children}
     </div>
   );
@@ -20,7 +20,7 @@ AppLayout.Main = function ({ children }) {
 
 AppLayout.Header = function ({ children }) {
   return (
-    <header className="sticky top-0 z-20 flex w-full items-center justify-between border-b border-four/20 bg-white/50 px-6 py-4 backdrop-blur-sm">
+    <header className="border-four/20 sticky top-0 z-20 flex w-full items-center justify-between border-b bg-white/50 px-6 py-4 backdrop-blur-sm">
       {children}
     </header>
   );
@@ -28,7 +28,7 @@ AppLayout.Header = function ({ children }) {
 
 AppLayout.Footer = function ({ children, navItems }) {
   return (
-    <footer className="fixed right-0 bottom-0 left-0 z-30 border-t border-four/20 bg-white px-8 pt-6 pb-10 shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
+    <footer className="border-four/20 relative z-30 mt-auto border-t bg-white px-8 pb-10 pt-6 shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
       {children}
       <nav>
         <ul className="mx-auto flex max-w-sm items-center justify-between">

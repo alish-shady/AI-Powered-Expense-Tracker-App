@@ -58,3 +58,12 @@
 .slide-in-from-bottom-10 {
   animation-name: slide-in-from-bottom;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-two);
+  border-radius: 999px;
+}

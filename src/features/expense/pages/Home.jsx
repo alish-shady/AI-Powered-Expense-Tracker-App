@@ -3,14 +3,15 @@ import Button from "../../../components/ui/Button";
 import AppLayout from "../../../components/layout/AppLayout";
 import ExpensesList from "../components/ExpensesList";
 import { useGetExpenses } from "../hooks/useGetExpenses";
+import Spinner from "../../../components/ui/Spinner";
 
 export default function Home() {
   const { expenses, error, isLoading } = useGetExpenses();
   console.log({ error });
-  if (isLoading) return <h1>loading</h1>;
+  if (isLoading) return <Spinner />;
   return (
     <AppLayout.Main>
-      <div className="text-text-1/40 relative flex h-full flex-col items-center gap-4 py-5 text-center">
+      <div className="text-text-1/40 relative flex h-full flex-col items-center gap-4 text-center">
         {expenses.length ? (
           <ExpensesList />
         ) : (

@@ -55,3 +55,14 @@ export async function getExpensesAPI() {
 
   return expenses;
 }
+
+export async function deleteExpenseAPI(expenseId) {
+  const { error } = await supabase
+    .from("expenses")
+    .delete()
+    .eq("id", expenseId);
+
+  if (error) throw new Error(error.message);
+
+  return true;
+}
