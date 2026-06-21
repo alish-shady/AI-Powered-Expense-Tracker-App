@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 
 import FormField from "./FormField";
@@ -7,38 +7,28 @@ const Select = forwardRef(function Select(
   {
     options = [],
     label = "Name",
+    name,
     setValue,
+    watch,
     error,
     className = "",
     value,
-    onChange,
     ...props
   },
   ref,
 ) {
+  const selected = watch(name);
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
   const containerRef = useRef(null);
 
   const baseStyles =
     "w-full cursor-pointer rounded-xl border border-four bg-white px-4 py-2.5 text-sm transition-all duration-200 focus:border-one focus:outline-none focus:ring-2 focus:ring-one/20";
 
-  const selectedLabel = selected || value || "Select an option";
+  const selectedLabel = selected || "Select an option";
   function handleSelect(option) {
-    setValue("category", option);
-    setSelected(option);
+    setValue(name, option, { shouldDirty: true });
     setOpen(false);
   }
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
     <FormField label={label} error={error}>

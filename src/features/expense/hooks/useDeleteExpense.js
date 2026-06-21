@@ -14,7 +14,6 @@ export function useDeleteExpense() {
       console.log(err);
     },
     onMutate: (data) => {
-      console.log({ data });
       queryClient.setQueryData(["expenses"], (cur) => {
         return cur.filter((exp) => exp.id !== data);
       });

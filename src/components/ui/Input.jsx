@@ -43,7 +43,6 @@ const Input = forwardRef(function Input(
     className: `${baseStyles} ${className}`,
     ...props,
   };
-
   return (
     <FormField label={label} error={error}>
       {isTextarea ? (

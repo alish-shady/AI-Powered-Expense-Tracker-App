@@ -1,6 +1,7 @@
 import React from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
+import { Link } from "react-router";
 
 function ListItem({ expense, setShowDeleteForm }) {
   return (
@@ -12,9 +13,11 @@ function ListItem({ expense, setShowDeleteForm }) {
       </div>
 
       <div className="flex items-center gap-4 text-2xl">
-        <span className="text-three hover:text-three/50 cursor-pointer transition-colors">
-          <MdModeEditOutline />
-        </span>
+        <Link to={`/app/expenses/${expense.id}`}>
+          <span className="text-three hover:text-three/50 cursor-pointer transition-colors">
+            <MdModeEditOutline />
+          </span>
+        </Link>
         <span
           onClick={() =>
             setShowDeleteForm({ show: true, expenseId: expense.id })

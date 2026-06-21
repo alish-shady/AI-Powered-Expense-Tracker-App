@@ -1,7 +1,7 @@
 import { IoChevronBack } from "react-icons/io5";
 import Heading from "../../../components/ui/Heading";
 import { useNavigate } from "react-router";
-export default function AddExpenseHeader() {
+export default function EditExpenseHeader() {
   const navigate = useNavigate();
   return (
     <div className="relative flex w-full items-center justify-center">
@@ -13,7 +13,7 @@ export default function AddExpenseHeader() {
         <IoChevronBack className="text-2xl" />
       </button>
       <Heading as="h3" className="text-one font-semibold tracking-tight">
-        Add Expense
+        Edit Expense
       </Heading>
     </div>
   );

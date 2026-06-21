@@ -50,7 +50,13 @@ export async function addExpenseAPI({ amount, category, description }) {
 }
 
 export async function getExpensesAPI() {
-  let { data: expenses, error } = await supabase.from("expenses").select("*");
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const { data: expenses, error } = await supabase
+    .from("expenses")
+    .select("*")
+    .eq("user_id", user.id);
   if (error) throw new Error(error.message);
 
   return expenses;
@@ -65,4 +71,16 @@ export async function deleteExpenseAPI(expenseId) {
   if (error) throw new Error(error.message);
 
   return true;
+}
+
+export async function updateExpenseAPI(expenseId, changedValues) {
+  const { data, error } = await supabase
+    .from("expenses")
+    .update(changedValues)
+    .eq("id", expenseId)
+    .select();
+
+  if (error) throw new Error(error.message);
+
+  return data;
 }

@@ -1,32 +1,40 @@
-import { useForm } from "react-hook-form";
-import Input from "../../../components/ui/Input";
-import Button from "../../../components/ui/Button";
-import Select from "../../../components/ui/Select";
-import AppLayout from "../../../components/layout/AppLayout";
-import { useAddExpense } from "../hooks/useAddExpense";
 import { useEffect } from "react";
-export default function AddExpense({ onSuccess }) {
-  const {
-    addExpense,
-    isPending,
-    isSuccess,
-    reset: resetMutation,
-  } = useAddExpense();
+import { useForm } from "react-hook-form";
+import Input from "./Input";
+import Button from "./Button";
+import Select from "./Select";
+import AppLayout from "../layout/AppLayout";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router";
+export default function ExpenseDetails({
+  mutate,
+  isSuccess,
+  resetMutation,
+  isPending,
+}) {
+  const { expenseId } = useParams();
+  const queryClient = useQueryClient();
+  const expenses = queryClient.getQueryData(["expenses"]) || [];
+  const selectedExpense = expenseId
+    ? expenses.find((exp) => exp.id == expenseId)
+    : {};
+  console.log({ selectedExpense });
   const {
     register,
     formState: { errors, isDirty },
     handleSubmit,
     reset,
+    watch,
     setValue,
   } = useForm({
     defaultValues: {
-      amount: "",
-      category: "Food",
-      description: "",
+      amount: selectedExpense?.amount || "",
+      category: selectedExpense?.category || "Food",
+      description: selectedExpense?.description || "",
     },
   });
-
   useEffect(() => {
+    console.log(isDirty);
     if (isDirty && isSuccess) resetMutation();
   }, [isDirty, isSuccess, resetMutation]);
   const categories = [
@@ -38,11 +46,13 @@ export default function AddExpense({ onSuccess }) {
     "Other",
   ];
   function onSubmit(data) {
-    addExpense(data);
-    reset();
+    mutate({
+      ...data,
+      ...(selectedExpense && { id: selectedExpense?.id }),
+    });
+    reset(data);
   }
   const buttonText = isSuccess ? "Expense Saved!" : "Save Expense";
-
   return (
     <AppLayout.Main>
       <form
@@ -67,6 +77,7 @@ export default function AddExpense({ onSuccess }) {
             options={categories}
             error={errors.category}
             setValue={setValue}
+            watch={watch}
             {...register("category", { required: "Please select a category" })}
           />
 
