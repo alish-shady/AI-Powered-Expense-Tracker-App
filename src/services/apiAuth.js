@@ -62,6 +62,20 @@ export async function getExpensesAPI() {
   return expenses;
 }
 
+export async function getExpenseAPI(expenseId) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const { data: expense, error } = await supabase
+    .from("expenses")
+    .select("*")
+    .eq("user_id", user.id)
+    .eq("id", expenseId);
+  if (error) throw new Error(error.message);
+
+  return expense.at(0);
+}
+
 export async function deleteExpenseAPI(expenseId) {
   const { error } = await supabase
     .from("expenses")

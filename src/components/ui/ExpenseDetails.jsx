@@ -4,8 +4,8 @@ import Input from "./Input";
 import Button from "./Button";
 import Select from "./Select";
 import AppLayout from "../layout/AppLayout";
-import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router";
+import { useGetExpense } from "../../features/expense/hooks/useGetExpense";
 export default function ExpenseDetails({
   mutate,
   isSuccess,
@@ -13,12 +13,11 @@ export default function ExpenseDetails({
   isPending,
 }) {
   const { expenseId } = useParams();
-  const queryClient = useQueryClient();
-  const expenses = queryClient.getQueryData(["expenses"]) || [];
-  const selectedExpense = expenseId
-    ? expenses.find((exp) => exp.id == expenseId)
-    : {};
-  console.log({ selectedExpense });
+  const isEditSession = Boolean(expenseId);
+  const { expense: selectedExpense, isLoading } = useGetExpense(
+    Number(expenseId),
+  );
+  console.log({ EXPENSE: selectedExpense });
   const {
     register,
     formState: { errors, isDirty },
@@ -28,13 +27,21 @@ export default function ExpenseDetails({
     setValue,
   } = useForm({
     defaultValues: {
-      amount: selectedExpense?.amount || "",
-      category: selectedExpense?.category || "Food",
-      description: selectedExpense?.description || "",
+      amount: "",
+      category: "Food",
+      description: "",
     },
   });
   useEffect(() => {
-    console.log(isDirty);
+    if (!selectedExpense) return;
+
+    reset({
+      amount: selectedExpense.amount,
+      category: selectedExpense.category,
+      description: selectedExpense.description,
+    });
+  }, [selectedExpense, reset]);
+  useEffect(() => {
     if (isDirty && isSuccess) resetMutation();
   }, [isDirty, isSuccess, resetMutation]);
   const categories = [
@@ -48,7 +55,7 @@ export default function ExpenseDetails({
   function onSubmit(data) {
     mutate({
       ...data,
-      ...(selectedExpense && { id: selectedExpense?.id }),
+      ...(selectedExpense && isEditSession && { id: selectedExpense.id }),
     });
     reset(data);
   }
@@ -57,8 +64,9 @@ export default function ExpenseDetails({
     <AppLayout.Main>
       <form
         noValidate
-        className="flex flex-col gap-6"
+        className={`"flex gap-6" flex-col ${isLoading && isEditSession ? "animate-custom-pulse backdrop-blur-2xl" : ""}`}
         onSubmit={handleSubmit(onSubmit)}
+        disabled={isLoading && isEditSession}
       >
         <div className="flex flex-col gap-5">
           <Input

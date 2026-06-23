@@ -18,7 +18,7 @@ export default function ConfirmDelete({ showDeleteForm, setShowDeleteForm }) {
       className="bg-three/50 bg backdrop-blur-xs fixed inset-0 z-50 flex items-center justify-center"
       onClick={handleBackdropClick}
     >
-      <form className="bg-three min-w-2/3 absolute left-1/2 top-1/2 flex aspect-video -translate-x-1/2 -translate-y-1/2 flex-col justify-center gap-8 rounded-xl p-6 shadow-2xl drop-shadow-2xl">
+      <form className="bg-three absolute left-1/2 top-1/2 flex aspect-video max-w-fit -translate-x-1/2 -translate-y-1/2 flex-col justify-between gap-8 rounded-xl p-16 shadow-2xl drop-shadow-2xl">
         <Heading as="h2">Are You Sure You Want To Delete This Expense?</Heading>
         <div className="flex justify-between gap-8">
           <Button

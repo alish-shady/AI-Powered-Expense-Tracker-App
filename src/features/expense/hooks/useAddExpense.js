@@ -12,8 +12,8 @@ export function useAddExpense() {
     mutate: addExpense,
   } = useMutation({
     mutationFn: addExpenseAPI,
-    onMutate: (data) => {
-      queryClient.setQueryData(["expenses"], (e) => [...e, data]);
+    onSuccess: (data) => {
+      queryClient.setQueryData(["expenses"], (e) => [...e, ...data]);
     },
   });
   return { data, isPending, isSuccess, addExpense, reset };
