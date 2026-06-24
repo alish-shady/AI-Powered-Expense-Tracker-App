@@ -1,9 +1,9 @@
 import { GoPlus } from "react-icons/go";
-import Button from "../../../components/ui/Button";
+import Button from "../../../components/common/AppButton";
 import AppLayout from "../../../components/layout/AppLayout";
 import ExpensesList from "../components/ExpensesList";
 import { useGetExpenses } from "../hooks/useGetExpenses";
-import Spinner from "../../../components/ui/Spinner";
+import Spinner from "../../../components/common/Spinner";
 
 export default function Home() {
   const { expenses, error, isLoading } = useGetExpenses();

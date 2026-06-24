@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { useSignup } from "../hooks/useSignup";
-import Input from "../../../components/ui/Input";
-import Button from "../../../components/ui/Button";
+import Input from "../../../components/common/Input";
+import Button from "../../../components/common/AppButton";
 export default function SignupForm() {
   const {
     register,
@@ -102,12 +102,17 @@ export default function SignupForm() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <Button type="submit" disabled={isPending}>
+        <Button
+          type="submit"
+          disabled={isPending}
+          size="xs"
+          className="bg-one hover:bg-one/90 py-5"
+        >
           {isPending ? "Creating Account..." : "Create Account"}
         </Button>
       </div>
 
-      <p className="text-text-1/70 text-center text-sm">
+      <p className="text-text-1/70 text-center text-xs">
         Already have an account?{" "}
         <Link className="text-one font-semibold hover:underline" to="/login">
           Sign In

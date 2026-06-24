@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
-import Input from "../../../components/ui/Input";
-import Button from "../../../components/ui/Button";
+import Input from "../../../components/common/Input";
+import Button from "../../../components/common/AppButton";
 import { useLogin } from "../hooks/useLogin";
 export default function LoginForm() {
   const { login, isPending } = useLogin();
@@ -57,7 +57,12 @@ export default function LoginForm() {
       </div>
 
       <div className="flex flex-col gap-3">
-        <Button type="submit" disabled={isPending}>
+        <Button
+          type="submit"
+          disabled={isPending}
+          size="xs"
+          className="bg-one py-5"
+        >
           {isPending ? "Signing In..." : "Sign In"}
         </Button>
 
@@ -65,23 +70,24 @@ export default function LoginForm() {
           <div className="absolute inset-0 flex items-center">
             <span className="border-four w-full border-t"></span>
           </div>
-          <div className="relative flex justify-center text-xs uppercase">
+          <div className="text-2xs relative flex justify-center uppercase">
             <span className="bg-three text-text-1/50 px-2">
               Or continue with
             </span>
           </div>
         </div>
 
-        <button
+        <Button
           type="button"
-          className="border-four active:scale-98 flex items-center justify-center gap-3 rounded-full border bg-white py-2.5 text-sm font-medium transition-all hover:bg-gray-50"
+          size="xs"
+          className="border-four active:scale-98 text-text-1/75 flex items-center justify-center gap-3 rounded-full border bg-white py-5 font-medium transition-all hover:bg-gray-50"
         >
-          <FcGoogle className="text-xl" />
+          <FcGoogle />
           Google
-        </button>
+        </Button>
       </div>
 
-      <p className="text-text-1/70 text-center text-sm">
+      <p className="text-text-1/70 text-center text-xs">
         Don't have an account?{" "}
         <Link className="text-one font-semibold hover:underline" to="/signup">
           Sign Up

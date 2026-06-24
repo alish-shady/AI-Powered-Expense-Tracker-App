@@ -16,7 +16,7 @@ export default function ProtectedRoute({ children }) {
     return (
       <div className="animate-custom-pulse bg-three flex h-screen w-full items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <h1 className="text-one/60 text-xl">LOGO</h1>
+          <h1 className="text-one/60 text-sm">LOGO</h1>
           <p className="text-one/60 text-sm font-medium">
             Loading your account...
           </p>

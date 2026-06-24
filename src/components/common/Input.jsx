@@ -21,7 +21,7 @@ const Input = forwardRef(function Input(
   const isTextarea = type === "textarea";
   const inputType = isPassword && showPassword ? "text" : type;
   const baseStyles =
-    "w-full rounded-xl border border-four bg-white px-4 py-2.5 text-sm transition-all duration-200 focus:border-one focus:outline-none focus:ring-2 focus:ring-one/20 disabled:opacity-50 disabled:bg-gray-50";
+    "w-full rounded-xl border border-four bg-white px-4 py-3 text-xs transition-all duration-200 focus:border-one focus:outline-none focus:ring-2 focus:ring-one/20 disabled:opacity-50 disabled:bg-gray-50";
 
   const handleChange = (e) => {
     onChange?.(e);

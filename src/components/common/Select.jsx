@@ -22,7 +22,7 @@ const Select = forwardRef(function Select(
   const containerRef = useRef(null);
 
   const baseStyles =
-    "w-full cursor-pointer rounded-xl border border-four bg-white px-4 py-2.5 text-sm transition-all duration-200 focus:border-one focus:outline-none focus:ring-2 focus:ring-one/20";
+    "w-full cursor-pointer rounded-xl border border-four bg-white px-4 py-3 text-xs transition-all duration-200 focus:border-one focus:outline-none focus:ring-2 focus:ring-one/20";
 
   const selectedLabel = selected || "Select an option";
   function handleSelect(option) {
@@ -59,7 +59,7 @@ const Select = forwardRef(function Select(
               key={opt}
               type="button"
               onClick={() => handleSelect(opt)}
-              className="hover:bg-four/10 hover:text-one w-full cursor-pointer px-4 py-2 text-left text-sm"
+              className="hover:bg-four/10 hover:text-one w-full cursor-pointer px-4 py-2 text-left text-xs"
             >
               {opt}
             </button>

@@ -1,16 +1,7 @@
 import AppLayout from "./AppLayout";
 import { GoPlus } from "react-icons/go";
-import Button from "../ui/Button";
-import AddExpenseHeader from "../../features/expense/components/AddExpenseHeader";
-import EditExpenseHeader from "../../features/expense/components/EditExpenseHeader";
-import HomeHeader from "../ui/HomeHeader";
-import {
-  Outlet,
-  useLocation,
-  useMatches,
-  useNavigate,
-  useParams,
-} from "react-router";
+import HomeHeader from "../common/HomeHeader";
+import { Outlet, useMatches, useNavigate } from "react-router";
 import {
   HiOutlineHome,
   HiOutlineChartPie,
@@ -44,7 +35,7 @@ export default function BasePageLayout() {
             }}
             aria-label="Add expense"
           >
-            <GoPlus className="cursor-pointer text-3xl" />
+            <GoPlus className="text-md cursor-pointer" />
           </button>
         )}
       </AppLayout.Footer>

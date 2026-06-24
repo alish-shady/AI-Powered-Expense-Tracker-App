@@ -7,7 +7,7 @@ export default function ProfileMenu({ onLogout, isPending }) {
     >
       <li
         onClick={onLogout}
-        className="flex cursor-pointer items-center gap-6 rounded-xl p-2 text-lg duration-200 hover:bg-four/10 hover:text-one"
+        className="hover:bg-four/10 hover:text-one flex cursor-pointer items-center gap-6 rounded-xl p-2 text-sm duration-200"
       >
         <IoExitOutline />
         <span>{isPending ? "Logging Out..." : "Logout"}</span>

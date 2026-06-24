@@ -1,4 +1,4 @@
-import Heading from "../../../components/ui/Heading";
+import Heading from "../../../components/common/Heading";
 import LoginForm from "../components/LoginForm";
 
 export default function Login() {

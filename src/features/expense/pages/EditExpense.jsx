@@ -1,5 +1,5 @@
 import AppLayout from "../../../components/layout/AppLayout";
-import ExpenseDetails from "../../../components/ui/ExpenseDetails";
+import ExpenseDetails from "../components/ExpenseDetails";
 import { useEditExpense } from "../hooks/useEditExpense";
 
 export default function EditExpense() {

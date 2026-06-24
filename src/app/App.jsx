@@ -4,14 +4,14 @@ import Login from "../features/authentication/pages/Login";
 import Signup from "../features/authentication/pages/Signup";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import ProtectedRoute from "../components/ui/ProtectedRoute";
+import ProtectedRoute from "../components/common/ProtectedRoute";
 import Home from "../features/expense/pages/Home";
 import Profile from "../features/profile/pages/Profile";
 import AppLayout from "../components/layout/AppLayout";
 import BasePageLayout from "../components/layout/BasePageLayout";
 import EditExpense from "../features/expense/pages/EditExpense";
 import AddExpense from "../features/expense/pages/AddExpense";
-import HomeHeader from "../components/ui/HomeHeader";
+import HomeHeader from "../components/common/HomeHeader";
 import EditExpenseHeader from "../features/expense/components/EditExpenseHeader";
 import AddExpenseHeader from "../features/expense/components/AddExpenseHeader";
 const queryClient = new QueryClient({

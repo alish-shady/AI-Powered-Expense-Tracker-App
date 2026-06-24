@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Input from "./Input";
-import Button from "./Button";
-import Select from "./Select";
-import AppLayout from "../layout/AppLayout";
+import Input from "../../../components/common/Input";
+import Button from "../../../components/common/AppButton";
+import Select from "../../../components/common/Select";
+import AppLayout from "../../../components/layout/AppLayout";
 import { useParams } from "react-router";
-import { useGetExpense } from "../../features/expense/hooks/useGetExpense";
+import { useGetExpense } from "../hooks/useGetExpense";
 export default function ExpenseDetails({
   mutate,
   isSuccess,

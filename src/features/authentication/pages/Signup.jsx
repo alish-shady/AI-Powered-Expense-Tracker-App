@@ -1,4 +1,4 @@
-import Heading from "../../../components/ui/Heading";
+import Heading from "../../../components/common/Heading";
 import SignupForm from "../components/SignupForm";
 
 export default function Signup() {

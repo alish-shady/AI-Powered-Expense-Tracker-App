@@ -16,7 +16,7 @@ export default function HomeHeader() {
           {fullName}
         </Heading>
       </div>
-      <button className="bg-one/10 text-one hover:bg-one/20 relative flex items-center justify-center rounded-xl p-2.5 transition-all active:scale-95">
+      <button className="bg-one/10 text-one hover:bg-one/20 relative flex items-center justify-center rounded-xl p-3 transition-all active:scale-95">
         <IoNotificationsOutline className="text-2xl" />
         <span className="bg-error absolute right-2.5 top-2 h-2 w-2 rounded-full ring-2 ring-white"></span>
       </button>

@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Heading from "../../../components/ui/Heading";
-import ListItem from "../../../components/ui/ListItem";
+import Heading from "../../../components/common/Heading";
+import ListItem from "../../../components/common/ListItem";
 import { useGetExpenses } from "../hooks/useGetExpenses";
 import ConfirmDelete from "./ConfirmDelete";
+import { ItemGroup } from "#components/ui/item";
 export default function ExpensesList() {
   const { expenses } = useGetExpenses();
   const [showDeleteForm, setShowDeleteForm] = useState({
@@ -12,7 +13,7 @@ export default function ExpensesList() {
   return (
     <div className="fade-bottom custom-scrollbar grid w-full gap-8 overflow-y-auto px-4">
       <Heading as="h1">Your Expenses</Heading>
-      <ul className="space-y-2">
+      <ItemGroup className="">
         {expenses.map((exp, i) => (
           <ListItem
             expense={exp}
@@ -21,7 +22,7 @@ export default function ExpensesList() {
             setShowDeleteForm={setShowDeleteForm}
           />
         ))}
-      </ul>
+      </ItemGroup>
       {showDeleteForm.show && (
         <ConfirmDelete
           showDeleteForm={showDeleteForm}

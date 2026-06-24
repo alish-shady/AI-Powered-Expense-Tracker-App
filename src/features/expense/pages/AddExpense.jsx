@@ -1,5 +1,5 @@
+import ExpenseDetails from "../components/ExpenseDetails";
 import { useAddExpense } from "../hooks/useAddExpense";
-import ExpenseDetails from "../../../components/ui/ExpenseDetails";
 export default function AddExpense({ onSuccess }) {
   const {
     addExpense,
