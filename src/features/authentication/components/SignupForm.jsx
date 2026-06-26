@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import { useSignup } from "../hooks/useSignup";
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/AppButton";
+import { getErrorMessage, normalizeError } from "#lib/utils";
+import { showError } from "@/utils/showError";
 export default function SignupForm() {
   const {
     register,
     formState: { errors },
     getValues,
-    setError,
     reset,
     handleSubmit,
   } = useForm();
@@ -24,14 +25,12 @@ export default function SignupForm() {
     signup(
       { fullName, email: data.email, password: data.password },
       {
-        onError: (error) => {
-          let message = error.message;
-          if (error.message === "User already registered") {
-            message = "This email is already linked to an account.";
-          }
-          setError("email", { type: "manual", message });
+        onError: (err) => {
+          const error = normalizeError(err);
+          const errorMessage = getErrorMessage(error);
+          showError(errorMessage);
         },
-        onSettled: () => reset(),
+        onSuccess: () => reset(),
       },
     );
   }

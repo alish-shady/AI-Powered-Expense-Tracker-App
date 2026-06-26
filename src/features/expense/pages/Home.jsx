@@ -7,7 +7,7 @@ import Spinner from "../../../components/common/Spinner";
 
 export default function Home() {
   const { expenses, error, isLoading } = useGetExpenses();
-  console.log({ error });
+
   if (isLoading) return <Spinner />;
   return (
     <AppLayout.Main>

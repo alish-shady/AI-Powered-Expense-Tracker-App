@@ -3,11 +3,15 @@ import { getExpensesAPI } from "../../../services/apiAuth";
 
 export function useGetExpenses() {
   const {
-    data: expenses,
+    data: expenses = [],
     error,
+    isError,
     isSuccess,
     isLoading,
-  } = useQuery({ queryKey: ["expenses"], queryFn: getExpensesAPI });
-  if (error) throw new Error(error.message);
-  return { expenses, isSuccess, isLoading };
+  } = useQuery({
+    queryKey: ["expenses"],
+    queryFn: getExpensesAPI,
+  });
+  //ERROR HANDLING FOR QUERIES
+  return { expenses, error, isError, isSuccess, isLoading };
 }

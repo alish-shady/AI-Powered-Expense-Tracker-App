@@ -5,12 +5,18 @@ import { useNavigate } from "react-router";
 export function useLogin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { mutate: login, isPending } = useMutation({
+  const {
+    mutate: login,
+    isPending,
+    error,
+    isError,
+  } = useMutation({
     mutationFn: loginAPI,
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data.user);
       navigate("/app", { replace: true });
     },
   });
+
   return { login, isPending };
 }

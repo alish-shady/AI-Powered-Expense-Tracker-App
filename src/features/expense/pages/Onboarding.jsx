@@ -28,7 +28,7 @@ export default function Onboarding() {
         <div className="animate-in fade-in slide-in-from-bottom-5 w-full space-y-4 duration-700">
           <Link className="block w-full" to="/signup">
             <Button
-              size="xs"
+              size="sm"
               className="shadow-one/20 bg-one hover:bg-one/90 cursor-pointer py-5 tracking-wide shadow-xl"
             >
               Get Started

@@ -14,10 +14,19 @@ import AddExpense from "../features/expense/pages/AddExpense";
 import HomeHeader from "../components/common/HomeHeader";
 import EditExpenseHeader from "../features/expense/components/EditExpenseHeader";
 import AddExpenseHeader from "../features/expense/components/AddExpenseHeader";
+import { Toaster } from "sonner";
+import RouteErrorBoundary from "#components/layout/RouteErrorBoundary";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 30 * 1000,
+    },
+    retry: (failureCount, error) => {
+      if (error?.status >= 400 && error?.status < 500) {
+        return false;
+      }
+
+      return failureCount < 2;
     },
   },
 });
@@ -25,46 +34,57 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Onboarding />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-  {
-    path: "/app",
-    element: (
-      <ProtectedRoute>
-        <BasePageLayout />
-      </ProtectedRoute>
-    ),
+    errorElement: <RouteErrorBoundary />,
     children: [
       {
         index: true,
-        element: <Navigate to="home" replace />,
+        element: <Onboarding />,
       },
       {
-        path: "home",
-        element: <Home />,
-        handle: { header: HomeHeader },
+        path: "login",
+        element: <Login />,
       },
       {
-        path: "expenses/:expenseId",
-        element: <EditExpense />,
-        handle: { header: EditExpenseHeader },
+        path: "signup",
+        element: <Signup />,
       },
       {
-        path: "expenses/add",
-        element: <AddExpense />,
-        handle: { header: AddExpenseHeader, showButton: false },
+        path: "app",
+        element: (
+          <ProtectedRoute>
+            <BasePageLayout />
+          </ProtectedRoute>
+        ),
+        errorElement: <RouteErrorBoundary />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="home" replace />,
+          },
+          {
+            path: "home",
+            element: <Home />,
+            handle: { header: HomeHeader },
+          },
+          {
+            path: "expenses/add",
+            element: <AddExpense />,
+            handle: { header: AddExpenseHeader, showButton: false },
+          },
+          {
+            path: "expenses/:expenseId",
+            element: <EditExpense />,
+            handle: { header: EditExpenseHeader },
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+        ],
       },
       {
-        path: "profile",
-        element: <Profile />,
+        path: "*",
+        element: <RouteErrorBoundary />,
       },
     ],
   },
@@ -72,6 +92,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <Toaster position="top-center" />
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

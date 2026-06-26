@@ -1,3 +1,4 @@
+import { normalizeError } from "#lib/utils";
 import supabase from "./supabase";
 
 export async function loginAPI({ email, password }) {
@@ -5,7 +6,7 @@ export async function loginAPI({ email, password }) {
     email: email,
     password: password,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw normalizeError(error);
   return data;
 }
 
@@ -19,20 +20,22 @@ export async function signupAPI({ email, password, fullName }) {
       },
     },
   });
-  if (error) throw new Error(error.message);
+  if (error) throw normalizeError(error);
 
   return data;
 }
 
 export async function signoutAPI() {
   const { error } = await supabase.auth.signOut({ scope: "local" });
-  if (error) throw new Error(error.message);
+  if (error) throw normalizeError(error);
 }
 
 export async function getCurrentUser() {
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
+  if (error) throw normalizeError(error);
   return user;
 }
 
@@ -44,7 +47,7 @@ export async function addExpenseAPI({ amount, category, description }) {
     .from("expenses")
     .insert([{ amount, category, description, user_id: user.id }])
     .select();
-  if (error) throw new Error(error.message);
+  if (error) throw normalizeError(error);
 
   return data;
 }
@@ -57,7 +60,11 @@ export async function getExpensesAPI() {
     .from("expenses")
     .select("*")
     .eq("user_id", user.id);
-  if (error) throw new Error(error.message);
+
+  if (error) {
+    console.log({ errorInMethod: error });
+    throw error;
+  }
 
   return expenses;
 }
@@ -71,7 +78,7 @@ export async function getExpenseAPI(expenseId) {
     .select("*")
     .eq("user_id", user.id)
     .eq("id", expenseId);
-  if (error) throw new Error(error.message);
+  if (error) throw normalizeError(error);
 
   return expense.at(0);
 }
@@ -82,7 +89,7 @@ export async function deleteExpenseAPI(expenseId) {
     .delete()
     .eq("id", expenseId);
 
-  if (error) throw new Error(error.message);
+  if (error) throw normalizeError(error);
 
   return true;
 }
@@ -94,7 +101,7 @@ export async function updateExpenseAPI(expenseId, changedValues) {
     .eq("id", expenseId)
     .select();
 
-  if (error) throw new Error(error.message);
+  if (error) throw normalizeError(error);
 
   return data;
 }
