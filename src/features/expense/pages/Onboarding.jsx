@@ -29,7 +29,7 @@ export default function Onboarding() {
           <Link className="block w-full" to="/signup">
             <Button
               size="sm"
-              className="shadow-one/20 bg-one hover:bg-one/90 cursor-pointer py-5 tracking-wide shadow-xl"
+              className="shadow-one/20 w-full cursor-pointer tracking-wide shadow-xl"
             >
               Get Started
             </Button>

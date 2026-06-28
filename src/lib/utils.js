@@ -14,6 +14,13 @@ class AppError extends Error {
 }
 
 export function normalizeError(err) {
+  const isNetworkError =
+    err?.message.includes("Failed to fetch") ||
+    err?.message.includes("NetworkError") ||
+    err?.message.includes("Load failed") ||
+    navigator.onLine === false;
+  if (isNetworkError)
+    return new AppError(err.message, "network_error", err.status);
   if (err?.message) {
     return new AppError(err.message, err.code, err.status);
   }
@@ -25,6 +32,7 @@ const DEFAULT_ERROR_MESSAGES = {
   email_not_confirmed: "Please confirm your email before signing in.",
   user_already_exists: "An account with this email already exists.",
   validation_error: "Please check your input and try again.",
+  network_error: "Please check your network connection and try again.",
   unknown_error: "Something went wrong. Please try again.",
 };
 

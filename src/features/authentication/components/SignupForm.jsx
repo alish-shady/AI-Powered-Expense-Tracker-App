@@ -101,12 +101,7 @@ export default function SignupForm() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <Button
-          type="submit"
-          disabled={isPending}
-          size="xs"
-          className="bg-one hover:bg-one/90 py-5"
-        >
+        <Button type="submit" disabled={isPending} size="xs">
           {isPending ? "Creating Account..." : "Create Account"}
         </Button>
       </div>

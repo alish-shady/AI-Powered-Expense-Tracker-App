@@ -27,6 +27,7 @@ AppLayout.Header = function ({ children }) {
 };
 
 AppLayout.Footer = function ({ children, navItems }) {
+  console.log({ navItems });
   return (
     <footer className="border-four/20 relative z-30 mt-auto border-t bg-white px-8 pb-10 pt-6 shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
       {children}
@@ -34,7 +35,7 @@ AppLayout.Footer = function ({ children, navItems }) {
         <ul className="mx-auto flex max-w-sm items-center justify-between">
           {navItems.map((item, index) => (
             <li key={index} className="flex flex-col items-center gap-1">
-              <NavLink to={item.label}>
+              <NavLink to={`/app/${item.label}`}>
                 {({ isActive }) => (
                   <button
                     className={`cursor-pointer rounded-xl p-2 transition-all duration-200 ${

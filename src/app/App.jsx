@@ -7,7 +7,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import Home from "../features/expense/pages/Home";
 import Profile from "../features/profile/pages/Profile";
-import AppLayout from "../components/layout/AppLayout";
 import BasePageLayout from "../components/layout/BasePageLayout";
 import EditExpense from "../features/expense/pages/EditExpense";
 import AddExpense from "../features/expense/pages/AddExpense";
@@ -16,17 +15,12 @@ import EditExpenseHeader from "../features/expense/components/EditExpenseHeader"
 import AddExpenseHeader from "../features/expense/components/AddExpenseHeader";
 import { Toaster } from "sonner";
 import RouteErrorBoundary from "#components/layout/RouteErrorBoundary";
+import RouteNotFound from "#components/layout/RouteNotFound";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 30 * 1000,
-    },
-    retry: (failureCount, error) => {
-      if (error?.status >= 400 && error?.status < 500) {
-        return false;
-      }
-
-      return failureCount < 2;
+      retry: false,
     },
   },
 });
@@ -34,7 +28,6 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <RouteErrorBoundary />,
     children: [
       {
         index: true,
@@ -47,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "test",
+        element: <RouteErrorBoundary />,
       },
       {
         path: "app",
@@ -84,7 +81,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <RouteErrorBoundary />,
+        element: <RouteNotFound />,
       },
     ],
   },

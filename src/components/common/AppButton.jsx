@@ -18,7 +18,7 @@ export default function AppButton({
   children,
   variant = "filled",
   size = "md",
-  type = "submit",
+  type = "button",
   fullWidth = true,
   className = "",
   ...props
@@ -28,7 +28,7 @@ export default function AppButton({
       type={type}
       variant={variantMap[variant] ?? variant}
       size={sizeMap[size] ?? size}
-      className={cn("rounded-full", fullWidth && "w-full", className)}
+      className={className}
       {...props}
     >
       {children}

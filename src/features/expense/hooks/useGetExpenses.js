@@ -12,6 +12,6 @@ export function useGetExpenses() {
     queryKey: ["expenses"],
     queryFn: getExpensesAPI,
   });
-  //ERROR HANDLING FOR QUERIES
+  if (error) throw error;
   return { expenses, error, isError, isSuccess, isLoading };
 }

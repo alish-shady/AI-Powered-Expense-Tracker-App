@@ -18,6 +18,6 @@ export function useGetExpense(expenseId) {
         ?.find((exp) => exp.id === expenseId);
     },
   });
-  if (error) throw new Error(error.message);
+  if (error) throw error;
   return { expense, isSuccess, isLoading };
 }

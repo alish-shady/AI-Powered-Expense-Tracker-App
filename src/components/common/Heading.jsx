@@ -1,4 +1,9 @@
-export default function Heading({ as = "h1", children, className = "" }) {
+export default function Heading({
+  as = "h1",
+  children,
+  className = "",
+  customStyles = false,
+}) {
   const styles = {
     h1: "text-lg font-bold text-one tracking-tight",
     h2: "text-md font-semibold text-one",
@@ -11,7 +16,9 @@ export default function Heading({ as = "h1", children, className = "" }) {
   const Component = as;
 
   return (
-    <Component className={`${styles[as] || styles.h1} ${className}`}>
+    <Component
+      className={`${customStyles || styles[as] || styles.h1} ${className}`}
+    >
       {children}
     </Component>
   );

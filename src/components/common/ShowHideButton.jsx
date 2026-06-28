@@ -17,16 +17,16 @@ export default function ShowHideButton({ inputRef, setShowPassword }) {
 
   return (
     <button
-      className="absolute top-1/2 right-3.5 flex -translate-y-1/2 items-center justify-center text-text-1/40 transition-colors hover:text-one focus:outline-none"
+      className="text-text-1/40 hover:text-one absolute right-3.5 top-1/2 flex -translate-y-1/2 cursor-pointer items-center justify-center transition-colors focus:outline-none"
       type="button"
       tabIndex={-1}
       onClick={toggleVisibility}
       aria-label={show ? "Hide password" : "Show password"}
     >
       {show ? (
-        <HiOutlineEyeSlash className="text-xl" />
+        <HiOutlineEyeSlash className="text-sm" />
       ) : (
-        <HiOutlineEye className="text-xl" />
+        <HiOutlineEye className="text-sm" />
       )}
     </button>
   );

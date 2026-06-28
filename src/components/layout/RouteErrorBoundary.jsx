@@ -1,46 +1,51 @@
+import Heading from "#components/common/Heading";
 import { getErrorMessage, normalizeError } from "#lib/utils";
-import { isRouteErrorResponse, useRouteError } from "react-router";
-
+import { useNavigate, useRouteError } from "react-router";
+import AppPageShell from "./AppPageShell";
+import AppButton from "#components/common/AppButton";
+import { ButtonGroup } from "#components/ui/button-group";
+function Header() {
+  return (
+    <div className="relative flex w-full items-center justify-center">
+      <Heading
+        as="h2"
+        className="text-destructive font-semibold tracking-tight"
+      >
+        An error happened
+      </Heading>
+    </div>
+  );
+}
 export default function RouteErrorBoundary() {
   const error = useRouteError();
-  console.log({ errorInBound: error });
-  // Handle Response errors (thrown with json() or new Response())
-  if (isRouteErrorResponse(error)) {
-    const normalized = normalizeError(error);
-    const message = getErrorMessage(normalized);
-    console.error("Route error:", error);
-    return (
-      <div role="alert">
-        <h2>Oops! Something went wrong.</h2>
-        <p>{message}</p>
-        {error.status === 404 && (
-          <p>The page you're looking for doesn't exist.</p>
-        )}
-        {/* Optionally show extra fields from error.data */}
-      </div>
-    );
-  }
-
-  // Handle regular JavaScript Errors
-  if (error instanceof Error) {
-    console.error("Uncaught error:", error);
-    return (
-      <div role="alert">
-        <h2>Unexpected Error</h2>
-        <p>{error.message}</p>
-        {import.meta.env.DEV && (
-          <pre style={{ whiteSpace: "pre-wrap" }}>{error.stack}</pre>
-        )}
-      </div>
-    );
-  }
-
-  // Fallback for anything else (e.g., thrown string)
-  console.error("Unknown error type:", error);
+  const navigate = useNavigate();
+  const normalizedError = normalizeError(error);
+  const errorMessage = getErrorMessage(normalizedError);
   return (
-    <div role="alert">
-      <h2>Something went wrong</h2>
-      <p>{String(error)}</p>
-    </div>
+    <AppPageShell Header={Header}>
+      <div className="flex h-full flex-col items-center justify-center gap-12 p-6">
+        <Heading as="h1" className="text-center">
+          {errorMessage}
+        </Heading>
+        <ButtonGroup orientation="horizontal" className="w-full">
+          <AppButton
+            variant="destructive"
+            size="sm"
+            className="flex-1"
+            onClick={() => window.location.reload()}
+          >
+            try again
+          </AppButton>
+          <AppButton
+            variant="ghost"
+            size="sm"
+            className="flex-1"
+            onClick={() => navigate("/app/home", { replace: true })}
+          >
+            go home
+          </AppButton>
+        </ButtonGroup>
+      </div>
+    </AppPageShell>
   );
 }

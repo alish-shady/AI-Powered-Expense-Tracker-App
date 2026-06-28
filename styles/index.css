@@ -28,6 +28,7 @@
   --text-base: 25px;
   --text-md: 31px;
   --text-lg: 39px;
+  --text-xl: 48px;
 
   @keyframes custom-pulse {
     0%,
@@ -135,24 +136,25 @@
 
 :root {
   --background: #fbffe4;
-  --foreground: #1a1a1a;
+  --foreground: #233d35;
 
   --card: #fbffe4;
-  --card-foreground: #1a1a1a;
+  --card-foreground: #233d35;
 
   --popover: #fbffe4;
-  --popover-foreground: #1a1a1a;
+  --popover-foreground: #233d35;
 
   --primary: #3d8d7a;
   --primary-foreground: #ffffff;
 
   --secondary: #b3d8a8;
-  --secondary-foreground: #1a1a1a;
+  --secondary-foreground: #233d35;
 
   --muted: #a3d1c6;
-  --muted-foreground: #1a1a1a;
+  --muted-foreground: #35534a;
+
   --accent: #a3d1c6;
-  --accent-foreground: #1a1a1a;
+  --accent-foreground: #233d35;
 
   --destructive: #d9534f;
   --destructive-foreground: #ffffff;
@@ -164,11 +166,11 @@
   --radius: 0.75rem;
 
   --sidebar: #fbffe4;
-  --sidebar-foreground: #1a1a1a;
+  --sidebar-foreground: #233d35;
   --sidebar-primary: #3d8d7a;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #a3d1c6;
-  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-accent-foreground: #233d35;
   --sidebar-border: #a3d1c6;
   --sidebar-ring: #3d8d7a;
 
@@ -176,7 +178,7 @@
   --chart-2: #b3d8a8;
   --chart-3: #a3d1c6;
   --chart-4: #d9534f;
-  --chart-5: #1a1a1a;
+  --chart-5: #233d35;
 }
 
 .dark {
