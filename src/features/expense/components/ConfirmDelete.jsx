@@ -27,12 +27,6 @@ export default function ConfirmDelete({ showDeleteForm, setShowDeleteForm }) {
           Are You Sure You Want To Delete This Expense?
         </Heading>
 
-        {error && (
-          <p className="text-error mt-3 text-xs">
-            {error.message || "Failed to delete. Please try again."}
-          </p>
-        )}
-
         <div className="mt-6 flex justify-between gap-5">
           <Button
             variant="outline"

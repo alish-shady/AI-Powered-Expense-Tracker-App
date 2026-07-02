@@ -1,7 +1,8 @@
-import { normalizeError } from "#lib/utils";
+import { assertOnline, normalizeError } from "#lib/utils";
 import supabase from "./supabase";
 
 export async function loginAPI({ email, password }) {
+  assertOnline();
   let { data, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
@@ -11,6 +12,7 @@ export async function loginAPI({ email, password }) {
 }
 
 export async function signupAPI({ email, password, fullName }) {
+  assertOnline();
   let { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -26,11 +28,14 @@ export async function signupAPI({ email, password, fullName }) {
 }
 
 export async function signoutAPI() {
+  console.log({ sex: true });
+  assertOnline();
   const { error } = await supabase.auth.signOut({ scope: "local" });
   if (error) throw normalizeError(error);
 }
 
 export async function getCurrentUser() {
+  assertOnline();
   const {
     data: { user },
     error,
@@ -40,6 +45,7 @@ export async function getCurrentUser() {
 }
 
 export async function addExpenseAPI({ amount, category, description }) {
+  assertOnline();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -53,6 +59,7 @@ export async function addExpenseAPI({ amount, category, description }) {
 }
 
 export async function getExpensesAPI() {
+  assertOnline();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -70,6 +77,7 @@ export async function getExpensesAPI() {
 }
 
 export async function getExpenseAPI(expenseId) {
+  assertOnline();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -84,6 +92,7 @@ export async function getExpenseAPI(expenseId) {
 }
 
 export async function deleteExpenseAPI(expenseId) {
+  assertOnline();
   const { error } = await supabase
     .from("expenses")
     .delete()
@@ -95,6 +104,7 @@ export async function deleteExpenseAPI(expenseId) {
 }
 
 export async function updateExpenseAPI(expenseId, changedValues) {
+  assertOnline();
   const { data, error } = await supabase
     .from("expenses")
     .update(changedValues)

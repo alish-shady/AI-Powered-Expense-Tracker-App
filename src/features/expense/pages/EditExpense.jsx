@@ -1,7 +1,7 @@
 import AppLayout from "../../../components/layout/AppLayout";
 import ExpenseDetails from "../components/ExpenseDetails";
 import { useEditExpense } from "../hooks/useEditExpense";
-
+//FIX THE BUTTON ON THIS PAGE
 export default function EditExpense() {
   const {
     editExpense,

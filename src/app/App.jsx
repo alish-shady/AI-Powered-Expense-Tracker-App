@@ -16,6 +16,8 @@ import AddExpenseHeader from "../features/expense/components/AddExpenseHeader";
 import { Toaster } from "sonner";
 import RouteErrorBoundary from "#components/layout/RouteErrorBoundary";
 import RouteNotFound from "#components/layout/RouteNotFound";
+import Dashboard from "@/features/dashboard/pages/Dashboard";
+import DashboardHeader from "@/features/dashboard/components/DashboardHeader";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -28,6 +30,7 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: "/",
+
     children: [
       {
         index: true,
@@ -62,6 +65,11 @@ const router = createBrowserRouter([
             path: "home",
             element: <Home />,
             handle: { header: HomeHeader },
+          },
+          {
+            path: "dashboard",
+            element: <Dashboard />,
+            handle: { header: DashboardHeader },
           },
           {
             path: "expenses/add",

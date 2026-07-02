@@ -10,6 +10,7 @@ export function useGetExpenses() {
     isLoading,
   } = useQuery({
     queryKey: ["expenses"],
+    networkMode: "always",
     queryFn: getExpensesAPI,
   });
   if (error) throw error;

@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteExpenseAPI } from "../../../services/apiAuth";
+import { getErrorMessage, normalizeError } from "#lib/utils";
+import { showError } from "@/utils/showError";
 
 export function useDeleteExpense() {
   const queryClient = useQueryClient();
@@ -10,8 +12,11 @@ export function useDeleteExpense() {
     isSuccess,
   } = useMutation({
     mutationFn: deleteExpenseAPI,
+    networkMode: "always",
     onError: (err) => {
-      console.log(err);
+      const error = normalizeError(err);
+      const errorMessage = getErrorMessage(error);
+      showError(errorMessage);
     },
     onMutate: (data) => {
       queryClient.setQueryData(["expenses"], (cur) => {

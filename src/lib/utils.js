@@ -62,3 +62,9 @@ export function getErrorMessage(error, customMessages = {}) {
 
   return DEFAULT_ERROR_MESSAGES.unknown_error;
 }
+
+export function assertOnline() {
+  if (typeof navigator !== "undefined" && !navigator.onLine) {
+    throw normalizeError({ message: "NetworkError" });
+  }
+}

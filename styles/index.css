@@ -50,7 +50,7 @@
       opacity: 1;
     }
   }
-  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-fade-in: fade-in 0.2s ease-out;
 
   @keyframes slide-in-from-bottom {
     from {
@@ -139,10 +139,10 @@
   --foreground: #233d35;
 
   --card: #fbffe4;
-  --card-foreground: #233d35;
+  --card-foreground: #31574c;
 
   --popover: #fbffe4;
-  --popover-foreground: #233d35;
+  --popover-foreground: #31574c;
 
   --primary: #3d8d7a;
   --primary-foreground: #ffffff;

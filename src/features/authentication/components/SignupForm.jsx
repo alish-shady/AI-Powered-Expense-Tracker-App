@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { useSignup } from "../hooks/useSignup";
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/AppButton";
-import { getErrorMessage, normalizeError } from "#lib/utils";
-import { showError } from "@/utils/showError";
 export default function SignupForm() {
   const {
     register,
@@ -21,20 +19,13 @@ export default function SignupForm() {
     const lastName = names.slice(1).join(" ");
     const fullName =
       `${firstName[0].toUpperCase() + firstName.slice(1)} ${lastName ? lastName[0].toUpperCase() + lastName.slice(1) : ""}`.trim();
-
     signup(
       { fullName, email: data.email, password: data.password },
       {
-        onError: (err) => {
-          const error = normalizeError(err);
-          const errorMessage = getErrorMessage(error);
-          showError(errorMessage);
-        },
         onSuccess: () => reset(),
       },
     );
   }
-
   return (
     <form
       noValidate

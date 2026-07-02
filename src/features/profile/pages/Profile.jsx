@@ -7,7 +7,6 @@ export default function Profile() {
   const { isPending, signout } = useSignout();
 
   const handleLogout = () => {
-    console.log("Logging out...");
     signout();
   };
   return (

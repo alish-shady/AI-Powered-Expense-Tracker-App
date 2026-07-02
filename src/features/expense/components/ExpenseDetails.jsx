@@ -17,7 +17,6 @@ export default function ExpenseDetails({
   const { expense: selectedExpense, isLoading } = useGetExpense(
     Number(expenseId),
   );
-  console.log({ EXPENSE: selectedExpense });
   const {
     register,
     formState: { errors, isDirty },
@@ -104,8 +103,9 @@ export default function ExpenseDetails({
         <div className="pt-4">
           <Button
             type="submit"
-            size="lg"
-            className={`shadow-one/20 shadow-lg ${isPending ? "animate-custom-pulse" : ""}`}
+            size="xl"
+            variant="secondary"
+            className={`shadow-one/20 w-full shadow-lg ${isPending ? "animate-custom-pulse" : ""}`}
           >
             {isPending ? "Saving Expense..." : buttonText}
           </Button>

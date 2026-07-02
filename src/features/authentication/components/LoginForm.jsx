@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/AppButton";
 import { useLogin } from "../hooks/useLogin";
-import { showError } from "@/utils/showError";
-import { getErrorMessage, normalizeError } from "#lib/utils";
 export default function LoginForm() {
   const { login, isPending } = useLogin();
   const {
@@ -14,20 +12,11 @@ export default function LoginForm() {
     formState: { errors },
     reset,
   } = useForm();
-
   function onSubmit(data) {
     login(data, {
       onSuccess: () => reset(),
-      onError: (err) => {
-        const error = normalizeError(err);
-        const errorMessage = getErrorMessage(error, {
-          invalid_credentials: "The email or password is incorrect.",
-        });
-        showError(errorMessage);
-      },
     });
   }
-
   return (
     <form
       noValidate

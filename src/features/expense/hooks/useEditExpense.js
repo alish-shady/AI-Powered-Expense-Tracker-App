@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateExpenseAPI } from "../../../services/apiAuth";
 import { useParams } from "react-router";
+import { getErrorMessage, normalizeError } from "#lib/utils";
+import { showError } from "@/utils/showError";
 
 export function useEditExpense() {
   const queryClient = useQueryClient();
@@ -12,8 +14,11 @@ export function useEditExpense() {
     reset,
   } = useMutation({
     mutationFn: (data) => updateExpenseAPI(Number(expenseId), data),
+    networkMode: "always",
     onError: (err) => {
-      console.log(err);
+      const error = normalizeError(err);
+      const errorMessage = getErrorMessage(error);
+      showError(errorMessage);
     },
     onMutate: (data) => {
       queryClient.setQueryData(["expenses"], (cur) => {

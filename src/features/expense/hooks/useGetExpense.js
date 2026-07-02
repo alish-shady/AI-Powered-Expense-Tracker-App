@@ -12,6 +12,7 @@ export function useGetExpense(expenseId) {
     queryKey: ["expense", expenseId],
     queryFn: () => getExpenseAPI(expenseId),
     enabled: Boolean(expenseId),
+    networkMode: "always",
     initialData: () => {
       return queryClient
         .getQueryData(["expenses"])
