@@ -8,7 +8,7 @@ function Card({ className, size = "default", ...props }) {
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card gap-(--card-spacing) bg-card py-(--card-spacing) text-card-foreground shadow-xs ring-border *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl flex aspect-video w-56 flex-col justify-center overflow-hidden rounded-xl text-sm ring-1 [--card-spacing:--spacing(6)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(4)]",
+        "group/card gap-(--card-spacing) bg-card py-(--card-spacing) text-card-foreground shadow-xs ring-border *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl flex aspect-video w-52 flex-col justify-center overflow-hidden rounded-xl text-xs ring-1 [--card-spacing:--spacing(6)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(4)]",
         className,
       )}
       {...props}
@@ -34,7 +34,7 @@ function CardTitle({ className, ...props }) {
     <div
       data-slot="card-title"
       className={cn(
-        "font-heading text-base font-medium leading-normal group-data-[size=sm]/card:text-sm",
+        "font-heading text-sm font-medium leading-normal group-data-[size=sm]/card:text-sm",
         className,
       )}
       {...props}

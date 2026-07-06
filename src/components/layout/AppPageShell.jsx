@@ -17,7 +17,6 @@ const navItems = [
 
 export default function AppPageShell({ children, Header, showButton = false }) {
   const navigate = useNavigate();
-  console.log({ children, Header });
   return (
     <AppLayout>
       <AppLayout.Header>{Header && <Header />}</AppLayout.Header>

@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateExpenseAPI } from "../../../services/apiAuth";
 import { useParams } from "react-router";
 import { getErrorMessage, normalizeError } from "#lib/utils";
 import { showError } from "@/utils/showError";
+import { updateExpenseAPI } from "@/services/apiExpenses";
 
 export function useEditExpense() {
   const queryClient = useQueryClient();

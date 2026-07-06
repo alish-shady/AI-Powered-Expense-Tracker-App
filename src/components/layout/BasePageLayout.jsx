@@ -10,7 +10,6 @@ export default function BasePageLayout() {
     .find(
       (match) => match.handle?.header || match.handle?.showButton !== undefined,
     );
-  console.log({ currentRoute });
   const showButton = currentRoute?.handle?.showButton ?? true;
   const CurrentHeader = currentRoute?.handle?.header || HomeHeader;
 

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteExpenseAPI } from "../../../services/apiAuth";
 import { getErrorMessage, normalizeError } from "#lib/utils";
 import { showError } from "@/utils/showError";
+import { deleteExpenseAPI } from "@/services/apiExpenses";
 
 export function useDeleteExpense() {
   const queryClient = useQueryClient();

@@ -8,8 +8,8 @@ export default function AppLayout({ children }) {
 
 AppLayout.Main = function ({ children }) {
   return (
-    <main className="grow overflow-y-auto px-6 pt-4">
-      <div className="mx-auto flex h-full max-w-lg flex-col gap-4">
+    <main className="w-full grow overflow-y-auto px-6 pt-4">
+      <div className="mx-auto flex h-full flex-col gap-4 xl:w-full">
         {children}
       </div>
     </main>

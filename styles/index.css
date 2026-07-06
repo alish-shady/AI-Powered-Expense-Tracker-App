@@ -139,22 +139,22 @@
   --foreground: #233d35;
 
   --card: #fbffe4;
-  --card-foreground: #31574c;
+  --card-foreground: #407466;
 
   --popover: #fbffe4;
-  --popover-foreground: #31574c;
+  --popover-foreground: #407466;
 
   --primary: #3d8d7a;
   --primary-foreground: #ffffff;
 
   --secondary: #b3d8a8;
-  --secondary-foreground: #233d35;
+  --secondary-foreground: #35534a;
 
   --muted: #a3d1c6;
   --muted-foreground: #35534a;
 
   --accent: #a3d1c6;
-  --accent-foreground: #233d35;
+  --accent-foreground: #35534a;
 
   --destructive: #d9534f;
   --destructive-foreground: #ffffff;

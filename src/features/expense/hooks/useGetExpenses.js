@@ -1,5 +1,5 @@
+import { getExpensesAPI } from "@/services/apiExpenses";
 import { useQuery } from "@tanstack/react-query";
-import { getExpensesAPI } from "../../../services/apiAuth";
 
 export function useGetExpenses() {
   const {
