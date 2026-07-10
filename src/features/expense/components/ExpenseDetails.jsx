@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/AppButton";
-import Select from "../../../components/common/Select";
 import AppLayout from "../../../components/layout/AppLayout";
 import { useParams } from "react-router";
 import { useGetExpense } from "../hooks/useGetExpense";
+import SelectCategory from "./SelectCategory";
 export default function ExpenseDetails({
   mutate,
   isSuccess,
@@ -27,7 +27,7 @@ export default function ExpenseDetails({
   } = useForm({
     defaultValues: {
       amount: "",
-      category: "Food",
+      category: "",
       description: "",
     },
   });
@@ -43,14 +43,7 @@ export default function ExpenseDetails({
   useEffect(() => {
     if (isDirty && isSuccess) resetMutation();
   }, [isDirty, isSuccess, resetMutation]);
-  const categories = [
-    "Food",
-    "Transport",
-    "Shopping",
-    "Entertainment",
-    "Health",
-    "Other",
-  ];
+
   function onSubmit(data) {
     mutate({
       ...data,
@@ -79,13 +72,11 @@ export default function ExpenseDetails({
             })}
           />
 
-          <Select
-            label="Category"
-            options={categories}
+          <SelectCategory
             error={errors.category}
             setValue={setValue}
             watch={watch}
-            {...register("category", { required: "Please select a category" })}
+            register={register}
           />
 
           <Input

@@ -1,5 +1,3 @@
-import { GoPlus } from "react-icons/go";
-import Button from "../../../components/common/AppButton";
 import AppLayout from "../../../components/layout/AppLayout";
 import ExpensesList from "../components/ExpensesList";
 import { useGetExpenses } from "../hooks/useGetExpenses";
@@ -16,14 +14,14 @@ export default function Home() {
           <ExpensesList />
         ) : (
           <>
-            <div className="bg-one/5 absolute flex h-40 w-40 items-center justify-center rounded-full">
+            <div className="bg-one/5 absolute top-1/3 flex h-40 w-40 items-center justify-center rounded-full">
               <img
                 src="/Logo.png"
                 alt="No expenses"
                 className="h-20 w-20 opacity-20 grayscale"
               />
             </div>
-            <div className="w-full">
+            <div className="flex h-full w-full flex-col items-center justify-center">
               <p className="text-text-1/60 text-lg font-medium">
                 No expenses yet
               </p>

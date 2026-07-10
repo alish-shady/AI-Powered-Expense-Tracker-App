@@ -59,7 +59,7 @@ const Select = forwardRef(function Select(
               key={opt}
               type="button"
               onClick={() => handleSelect(opt)}
-              className="hover:bg-four/10 hover:text-one w-full cursor-pointer px-4 py-2 text-left text-xs"
+              className="hover:bg-four/10 hover:text-one w-full cursor-pointer p-4 text-left text-xs"
             >
               {opt}
             </button>

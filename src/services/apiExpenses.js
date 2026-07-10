@@ -23,7 +23,8 @@ export async function getExpensesAPI() {
   const { data: expenses, error } = await supabase
     .from("expenses")
     .select("*")
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .order("created_at");
 
   if (error) {
     throw error;
