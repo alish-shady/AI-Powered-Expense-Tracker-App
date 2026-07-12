@@ -72,13 +72,6 @@ export default function ExpenseDetails({
             })}
           />
 
-          <SelectCategory
-            error={errors.category}
-            setValue={setValue}
-            watch={watch}
-            register={register}
-          />
-
           <Input
             type="textarea"
             label="Description"
@@ -88,6 +81,12 @@ export default function ExpenseDetails({
               required: "Description is required",
               minLength: { value: 3, message: "Description is too short" },
             })}
+          />
+          <SelectCategory
+            error={errors.category}
+            setValue={setValue}
+            watch={watch}
+            register={register}
           />
         </div>
 

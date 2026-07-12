@@ -5,7 +5,8 @@ import { useGetCategory } from "../hooks/useGetCategory";
 import { getErrorMessage, normalizeError } from "#lib/utils";
 
 export default function SelectCategory({ error, setValue, watch, register }) {
-  const { categories, getCategories, isFetching } = useGetCategory();
+  const description = watch("description");
+  const { categories, getCategories, isFetching } = useGetCategory(description);
   async function handleAIDecide() {
     if (isFetching) return;
     const { data, error: err, isSuccess } = await getCategories();

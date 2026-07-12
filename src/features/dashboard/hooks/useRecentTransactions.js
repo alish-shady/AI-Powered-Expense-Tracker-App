@@ -26,6 +26,7 @@ export function useRecentTransactions() {
         category: transaction.category,
         price: transaction.amount.toFixed(2),
         date,
+        id: transaction.id,
       };
     });
     return recentTransactions;

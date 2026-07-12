@@ -3,6 +3,7 @@ import supabase from "./supabase";
 
 export async function addExpenseAPI({ amount, category, description }) {
   assertOnline();
+  console.log({ amount, category, description });
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -23,7 +23,7 @@ const fallbackCategories = [
   "Savings",
   "Taxes",
 ];
-export function useGetCategory() {
+export function useGetCategory(description) {
   const {
     data: categories = [],
     error,
@@ -32,7 +32,7 @@ export function useGetCategory() {
   } = useQuery({
     queryKey: ["categories"],
     networkMode: "always",
-    queryFn: getSmartCategories,
+    queryFn: () => getSmartCategories(description),
     enabled: false,
   });
 

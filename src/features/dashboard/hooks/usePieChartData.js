@@ -24,15 +24,15 @@ export function usePieChartData() {
 
     const chartData = normalizedCategories.map((cur) => {
       return {
-        category: cur[0],
+        category: cur[0].split(" ").join("-"),
         expense: cur[1],
-        fill: `var(--color-${cur[0]})`,
+        fill: `var(--color-${cur[0].split(" ").join("-")})`,
       };
     });
     const chartConfig = normalizedCategories.reduce((config, cur, i) => {
       return {
         ...config,
-        [cur[0]]: {
+        [cur[0].split(" ").join("-")]: {
           label: cur[0],
           color: `var(--chart-${i + 1})`,
         },

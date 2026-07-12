@@ -55,7 +55,7 @@ export default function RecentTransactions() {
                 ))
               : recentTransactions.map((tran) => {
                   return (
-                    <TableRow key={tran.name}>
+                    <TableRow key={tran.id}>
                       <TableCell className="font-medium">{tran.name}</TableCell>
                       <TableCell>{tran.category}</TableCell>
                       <TableCell className="text-primary">
