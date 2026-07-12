@@ -1,12 +1,38 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getErrorMessage, normalizeError } from "#lib/utils";
 import { showError } from "@/utils/showError";
-import { addExpenseAPI } from "@/services/apiExpenses";
+import { addExpenseAPI, updateExpenseAPI } from "@/services/apiExpenses";
 import { useNavigate } from "react-router";
+import { getExpenseName } from "@/services/apiExpenseName";
 
 export function useAddExpense() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  async function generateAndAssignName({ description, category, id }) {
+    try {
+      const result = await getExpenseName({
+        description,
+        category,
+      });
+      const generatedName = result.name;
+      if (!generatedName)
+        throw normalizeError(
+          new Error("The AI could not generate an expense name."),
+        );
+      const data = await updateExpenseAPI(id, {
+        name: generatedName,
+      });
+      console.log({ data });
+      await queryClient.invalidateQueries({
+        queryKey: ["expenses"],
+      });
+    } catch (err) {
+      console.log(err);
+      await updateExpenseAPI(id, {
+        name: description,
+      });
+    }
+  }
   const {
     data,
     reset,
@@ -24,6 +50,7 @@ export function useAddExpense() {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(["expenses"], (e) => [...e, ...data]);
+      void generateAndAssignName(...data);
       navigate("/app/home");
     },
   });

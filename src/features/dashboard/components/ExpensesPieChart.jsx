@@ -22,7 +22,6 @@ export default function ExpensesPieChart() {
     chartInfo: { chartConfig, chartData },
     isLoading,
   } = usePieChartData();
-  console.log({ chartConfig, chartData });
   return (
     <Card className="mx-auto aspect-auto w-full justify-start gap-4 overflow-visible [--card-spacing:--spacing(4)] sm:gap-5 sm:[--card-spacing:--spacing(6)] lg:max-w-lg lg:gap-6 lg:[--card-spacing:--spacing(8)]">
       <CardHeader className="items-center">
