@@ -22,12 +22,11 @@ export function useAddExpense() {
       const data = await updateExpenseAPI(id, {
         name: generatedName,
       });
-      console.log({ data });
       await queryClient.invalidateQueries({
         queryKey: ["expenses"],
       });
     } catch (err) {
-      console.log(err);
+      console.log({ err });
       await updateExpenseAPI(id, {
         name: description,
       });

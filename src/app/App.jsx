@@ -45,10 +45,6 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path: "test",
-        element: <RouteErrorBoundary />,
-      },
-      {
         path: "app",
         element: (
           <ProtectedRoute>

@@ -23,6 +23,7 @@ const fallbackCategories = [
   "Savings",
   "Taxes",
 ];
+
 export function useGetCategory(description) {
   const {
     data: categories = [],

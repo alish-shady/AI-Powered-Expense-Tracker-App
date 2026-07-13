@@ -34,6 +34,8 @@ const DEFAULT_ERROR_MESSAGES = {
   validation_error: "Please check your input and try again.",
   network_error: "Please check your network connection and try again.",
   unknown_error: "Something went wrong. Please try again.",
+  ai_timeout:
+    "Category generation timed out. Please pick the category manually from the list",
 };
 
 const STATUS_ERROR_MESSAGES = {

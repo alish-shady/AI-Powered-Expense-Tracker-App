@@ -22,7 +22,7 @@ export function useRecentTransactions() {
         day: "numeric",
       }).format(new Date(transaction.created_at));
       return {
-        name: transaction.description.slice(0, 100),
+        name: transaction.name ?? transaction.description,
         category: transaction.category,
         price: transaction.amount.toFixed(2),
         date,

@@ -13,7 +13,8 @@ export async function getExpenseName({ description, category }) {
     },
   );
   if (error) {
-    throw error;
+    const errorBody = await error.context.json();
+    throw errorBody;
   }
   return expenseName;
 }
