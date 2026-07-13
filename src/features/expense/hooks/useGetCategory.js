@@ -35,6 +35,7 @@ export function useGetCategory(description) {
     networkMode: "always",
     queryFn: () => getSmartCategories(description),
     enabled: false,
+    gcTime: 0,
   });
 
   const labels = categories?.map((cat) => cat.label);

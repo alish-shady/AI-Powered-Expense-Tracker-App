@@ -36,6 +36,7 @@ const DEFAULT_ERROR_MESSAGES = {
   unknown_error: "Something went wrong. Please try again.",
   ai_timeout:
     "Category generation timed out. Please pick the category manually from the list",
+  email_exists: "A user with this email address has already been registered",
 };
 
 const STATUS_ERROR_MESSAGES = {
@@ -62,6 +63,7 @@ export function getErrorMessage(error, customMessages = {}) {
     return STATUS_ERROR_MESSAGES[error.status];
   }
 
+  if (error.message) return error.message;
   return DEFAULT_ERROR_MESSAGES.unknown_error;
 }
 
@@ -70,3 +72,5 @@ export function assertOnline() {
     throw normalizeError({ message: "NetworkError" });
   }
 }
+
+export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;

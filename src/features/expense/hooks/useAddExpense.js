@@ -42,7 +42,6 @@ export function useAddExpense() {
     mutationFn: addExpenseAPI,
     networkMode: "always",
     onError: (err) => {
-      console.log(err);
       const error = normalizeError(err);
       const errorMessage = getErrorMessage(error);
       showError(errorMessage);

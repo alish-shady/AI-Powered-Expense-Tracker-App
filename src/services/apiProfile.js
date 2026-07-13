@@ -10,3 +10,15 @@ export async function getCurrentUserAPI() {
   if (error) throw normalizeError(error);
   return user;
 }
+
+export async function changeUserEmailAPI(newEmail) {
+  assertOnline();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.updateUser({
+    email: newEmail,
+  });
+  if (error) throw error;
+  return user;
+}

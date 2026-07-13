@@ -50,6 +50,7 @@ export async function getExpenseAPI(expenseId) {
 
 export async function deleteExpenseAPI(expenseId) {
   assertOnline();
+  console.log({ expenseId });
   const { error } = await supabase
     .from("expenses")
     .delete()

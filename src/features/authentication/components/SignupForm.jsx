@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useSignup } from "../hooks/useSignup";
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/AppButton";
+import { EMAIL_REGEX } from "#lib/utils";
 export default function SignupForm() {
   const {
     register,
@@ -53,7 +54,7 @@ export default function SignupForm() {
           {...register("email", {
             required: "Email is required",
             pattern: {
-              value: /\S+@\S+\.\S+/,
+              value: EMAIL_REGEX,
               message: "Please provide a valid email address",
             },
           })}
