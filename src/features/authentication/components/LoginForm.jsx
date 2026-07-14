@@ -59,7 +59,7 @@ export default function LoginForm() {
           type="submit"
           disabled={isPending}
           size="xs"
-          className="bg-one py-5"
+          className="bg-primary py-5"
         >
           {isPending ? "Signing In..." : "Sign In"}
         </Button>
@@ -69,7 +69,7 @@ export default function LoginForm() {
             <span className="border-four w-full border-t"></span>
           </div>
           <div className="text-2xs relative flex justify-center uppercase">
-            <span className="bg-three text-text-1/50 px-2">
+            <span className="bg-background text-muted-foreground/50 px-2">
               Or continue with
             </span>
           </div>
@@ -78,16 +78,19 @@ export default function LoginForm() {
         <Button
           type="button"
           size="xs"
-          className="border-four active:scale-98 text-text-1/75 flex items-center justify-center gap-3 rounded-full border bg-white py-5 font-medium transition-all hover:bg-gray-50"
+          className="border-muted active:scale-98 text-primary-foreground/75 bg-primary hover:bg-primary/80 flex items-center justify-center gap-3 rounded-full border py-5 font-medium transition-all"
         >
           <FcGoogle />
           Google
         </Button>
       </div>
 
-      <p className="text-text-1/70 text-center text-xs">
+      <p className="text-muted-foreground/70 text-center text-xs">
         Don't have an account?{" "}
-        <Link className="text-one font-semibold hover:underline" to="/signup">
+        <Link
+          className="text-primary font-semibold hover:underline"
+          to="/signup"
+        >
           Sign Up
         </Link>
       </p>

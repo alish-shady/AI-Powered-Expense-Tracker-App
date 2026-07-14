@@ -1,25 +1,24 @@
 import {
   Item,
-  ItemMedia,
-  ItemActions,
   ItemGroup,
   ItemTitle,
   ItemDescription,
   ItemContent,
 } from "#components/ui/item";
 import { useSignout } from "@/features/authentication/hooks/useSignout";
-import { IoExitOutline } from "react-icons/io5";
 import { useState } from "react";
 import ProfileMenuItem from "#components/common/ProfileMenuItem";
 import ChangeEmailModal from "./ChangeEmailModal";
-import { LockKeyhole, LogOut, Mail, Palette } from "lucide-react";
+import { LockKeyhole, LogOut, Mail, Palette, Trash } from "lucide-react";
 import ChangePasswordModal from "./ChangePasswordModal";
 import ThemeToggle from "./ThemeToggle";
+import DeleteAccountModal from "./DeleteAccountModal";
 
 export default function ProfileMenu() {
   const { isPending, signout } = useSignout();
   const [showChangeEmail, setShowChangeEmail] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   return (
     <>
       <ItemGroup>
@@ -50,18 +49,13 @@ export default function ProfileMenu() {
         >
           <ThemeToggle />
         </ProfileMenuItem>
-        <Item
-          variant="outline"
-          size="sm"
-          className="hover:border-destructive/40 hover:bg-destructive/10 hover:text-destructive"
+        <ProfileMenuItem
+          className="hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+          onClick={() => setShowConfirmDelete(true)}
+          Icon={Trash}
         >
-          <div className="flex cursor-pointer gap-4">
-            <ItemMedia variant="icon">
-              <IoExitOutline />
-            </ItemMedia>
-            <ItemActions>Delete Account</ItemActions>
-          </div>
-        </Item>
+          Delete Account
+        </ProfileMenuItem>
         <Item variant="outline" size="sm">
           <ItemContent>
             <ItemTitle>Member Since:</ItemTitle>
@@ -72,6 +66,9 @@ export default function ProfileMenu() {
       {showChangeEmail && <ChangeEmailModal setShowForm={setShowChangeEmail} />}
       {showChangePassword && (
         <ChangePasswordModal setShowForm={setShowChangePassword} />
+      )}
+      {showConfirmDelete && (
+        <DeleteAccountModal setShowForm={setShowConfirmDelete} />
       )}
     </>
   );

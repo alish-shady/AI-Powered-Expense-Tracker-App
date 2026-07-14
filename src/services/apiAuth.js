@@ -32,3 +32,13 @@ export async function signoutAPI() {
   const { error } = await supabase.auth.signOut({ scope: "local" });
   if (error) throw normalizeError(error);
 }
+
+export async function deleteUserAPI() {
+  assertOnline();
+  const { data, error } = await supabase.functions.invoke("delete-user", {
+    method: "DELETE",
+  });
+  console.log({ error });
+  if (error) throw error;
+  return data;
+}

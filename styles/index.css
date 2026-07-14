@@ -3,16 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/nunito/wght.css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme {
-  --color-one: #3d8d7a;
-  --color-two: #b3d8a8;
-  --color-three: #fbffe4;
-  --color-four: #a3d1c6;
-  --color-error: #d9534f;
-  --color-text-1: #000;
-
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 12px;
@@ -30,6 +21,7 @@
   --text-lg: 39px;
   --text-xl: 48px;
 
+  --breakpoint-xs: 30rem;
   @keyframes custom-pulse {
     0%,
     100% {
@@ -86,7 +78,7 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--color-two);
+  background: var(--color-secondary);
   border-radius: 999px;
 }
 

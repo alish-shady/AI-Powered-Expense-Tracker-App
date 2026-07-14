@@ -12,7 +12,6 @@ import { MdModeEditOutline } from "react-icons/md";
 import { Link } from "react-router";
 
 function ListItem({ expense, position, onRequestDelete }) {
-  console.log({ expense });
   return (
     <Item
       variant="outline"
@@ -38,7 +37,7 @@ function ListItem({ expense, position, onRequestDelete }) {
         </ItemDescription>
       </ItemHeader>
 
-      <ItemContent className="flex flex-row items-center justify-between gap-4">
+      <ItemContent className="xs:flex-row flex flex-col items-center justify-between gap-4">
         <div className="bg-primary-foreground/10 flex min-w-0 items-center gap-2 rounded-full px-3 py-1.5">
           <ItemTitle className="text-2xs text-primary-foreground/80 font-bold">
             Description:

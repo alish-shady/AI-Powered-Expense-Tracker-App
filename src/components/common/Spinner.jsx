@@ -13,7 +13,7 @@ export default function Spinner() {
           strokeDasharray="47.12 15.71"
           strokeDashoffset="6"
           strokeLinecap="round"
-          className="stroke-one"
+          className="stroke-primary"
         />
       </svg>
       <Heading as="h3">Fetching...</Heading>

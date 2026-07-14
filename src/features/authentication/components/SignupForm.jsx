@@ -98,9 +98,12 @@ export default function SignupForm() {
         </Button>
       </div>
 
-      <p className="text-text-1/70 text-center text-xs">
+      <p className="text-muted-foreground/70 text-center text-xs">
         Already have an account?{" "}
-        <Link className="text-one font-semibold hover:underline" to="/login">
+        <Link
+          className="text-primary font-semibold hover:underline"
+          to="/login"
+        >
           Sign In
         </Link>
       </p>

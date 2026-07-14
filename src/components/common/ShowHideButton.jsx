@@ -17,7 +17,7 @@ export default function ShowHideButton({ inputRef, setShowPassword }) {
 
   return (
     <button
-      className="text-text-1/40 hover:text-one absolute right-3.5 top-1/2 flex -translate-y-1/2 cursor-pointer items-center justify-center transition-colors focus:outline-none"
+      className="text-muted-foreground/40 hover:text-primary absolute right-3.5 top-1/2 flex -translate-y-1/2 cursor-pointer items-center justify-center transition-colors focus:outline-none"
       type="button"
       tabIndex={-1}
       onClick={toggleVisibility}

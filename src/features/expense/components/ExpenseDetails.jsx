@@ -95,7 +95,7 @@ export default function ExpenseDetails({
             type="submit"
             size="xl"
             variant="secondary"
-            className={`shadow-one/20 w-full shadow-lg ${isPending ? "animate-custom-pulse" : ""}`}
+            className={`shadow-primary/20 w-full shadow-lg ${isPending ? "animate-custom-pulse" : ""}`}
           >
             {isPending ? "Saving Expense..." : buttonText}
           </Button>
