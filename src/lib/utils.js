@@ -35,8 +35,9 @@ const DEFAULT_ERROR_MESSAGES = {
   network_error: "Please check your network connection and try again.",
   unknown_error: "Something went wrong. Please try again.",
   ai_timeout:
-    "Category generation timed out. Please pick the category manually from the list",
-  email_exists: "A user with this email address has already been registered",
+    "Category generation timed out. Please pick the category manually from the list.",
+  email_exists: "A user with this email address has already been registered.",
+  current_password_invalid: "The current password is not correct.",
 };
 
 const STATUS_ERROR_MESSAGES = {

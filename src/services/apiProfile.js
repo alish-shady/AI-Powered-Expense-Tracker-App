@@ -22,3 +22,13 @@ export async function changeUserEmailAPI(newEmail) {
   if (error) throw error;
   return user;
 }
+
+export async function changePasswordAPI({ currentPassword, newPassword }) {
+  assertOnline();
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword,
+    current_password: currentPassword,
+  });
+  console.log({ error });
+  if (error) throw error;
+}

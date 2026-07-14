@@ -9,51 +9,40 @@ import {
 } from "#components/ui/item";
 import { useSignout } from "@/features/authentication/hooks/useSignout";
 import { IoExitOutline } from "react-icons/io5";
-import { useChangeUserEmail } from "../hooks/useChangeUserEmail";
 import { useState } from "react";
-import Modal from "#components/common/Modal";
-import Input from "#components/common/Input";
 import ProfileMenuItem from "#components/common/ProfileMenuItem";
-import ChangeEmailForm from "./ChangeEmailForm";
+import ChangeEmailModal from "./ChangeEmailModal";
+import { LogOut, Mail } from "lucide-react";
+import ChangePasswordModal from "./ChangePasswordModal";
 
 export default function ProfileMenu() {
   const { isPending, signout } = useSignout();
-  // const {
-  //   data,
-  //   isSuccess,
-  //   isPending: isChanging,
-  //   changeEmail,
-  // } = useChangeUserEmail();
   const [showChangeEmail, setShowChangeEmail] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
   return (
     <>
       <ItemGroup>
         <ProfileMenuItem
           onClick={signout}
-          Icon={IoExitOutline}
+          Icon={LogOut}
           className="hover:border-destructive/40 hover:bg-destructive/10 hover:text-destructive"
         >
           {isPending ? "Logging Out..." : "Logout"}
         </ProfileMenuItem>
         <ProfileMenuItem
           className="hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
-          onClick={() => setShowChangeEmail({ show: true })}
-          Icon={IoExitOutline}
+          onClick={() => setShowChangeEmail(true)}
+          Icon={Mail}
         >
           Change Email
         </ProfileMenuItem>
-        <Item
-          variant="outline"
-          size="sm"
+        <ProfileMenuItem
           className="hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+          onClick={() => setShowChangePassword(true)}
+          Icon={Mail}
         >
-          <div className="flex cursor-pointer gap-4">
-            <ItemMedia variant="icon">
-              <IoExitOutline />
-            </ItemMedia>
-            <ItemActions>Change Password</ItemActions>
-          </div>
-        </Item>
+          Change Password
+        </ProfileMenuItem>
         <Item
           variant="outline"
           size="sm"
@@ -85,7 +74,10 @@ export default function ProfileMenu() {
           </ItemContent>
         </Item>
       </ItemGroup>
-      {showChangeEmail && <ChangeEmailForm setShowForm={setShowChangeEmail} />}
+      {showChangeEmail && <ChangeEmailModal setShowForm={setShowChangeEmail} />}
+      {showChangePassword && (
+        <ChangePasswordModal setShowForm={setShowChangePassword} />
+      )}
     </>
   );
 }

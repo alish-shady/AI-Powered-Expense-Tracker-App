@@ -10,7 +10,7 @@ export default function ProfileMenuItem({
     <Item variant="outline" size="sm" className={className} onClick={onClick}>
       <div className="flex cursor-pointer gap-4">
         <ItemMedia variant="icon">
-          <Icon />
+          <Icon className="size-4" />
         </ItemMedia>
         <ItemActions>{children}</ItemActions>
       </div>

@@ -5,7 +5,7 @@ import AppButton from "#components/common/AppButton";
 import Modal from "#components/common/Modal";
 import Input from "#components/common/Input";
 
-export default function ChangeEmailForm({ setShowForm }) {
+export default function ChangeEmailModal({ setShowForm }) {
   const { changeEmail, error, isPending, isSuccess } = useChangeUserEmail();
   const [newEmail, setNewEmail] = useState("");
   const [inputError, setInputError] = useState("");
@@ -28,7 +28,7 @@ export default function ChangeEmailForm({ setShowForm }) {
 
   return (
     <Modal
-      heading="Enter the new desired email."
+      heading="Enter the new desired email:"
       input={
         <Input
           label="None"
