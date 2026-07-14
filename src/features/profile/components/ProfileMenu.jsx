@@ -12,8 +12,9 @@ import { IoExitOutline } from "react-icons/io5";
 import { useState } from "react";
 import ProfileMenuItem from "#components/common/ProfileMenuItem";
 import ChangeEmailModal from "./ChangeEmailModal";
-import { LogOut, Mail } from "lucide-react";
+import { LockKeyhole, LogOut, Mail, Palette } from "lucide-react";
 import ChangePasswordModal from "./ChangePasswordModal";
+import ThemeToggle from "./ThemeToggle";
 
 export default function ProfileMenu() {
   const { isPending, signout } = useSignout();
@@ -39,22 +40,16 @@ export default function ProfileMenu() {
         <ProfileMenuItem
           className="hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
           onClick={() => setShowChangePassword(true)}
-          Icon={Mail}
+          Icon={LockKeyhole}
         >
           Change Password
         </ProfileMenuItem>
-        <Item
-          variant="outline"
-          size="sm"
-          className="hover:border-accent/50 hover:bg-accent/20 hover:text-accent-foreground"
+        <ProfileMenuItem
+          className="hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+          Icon={Palette}
         >
-          <div className="flex cursor-pointer gap-4">
-            <ItemMedia variant="icon">
-              <IoExitOutline />
-            </ItemMedia>
-            <ItemActions>Theme Toggle</ItemActions>
-          </div>
-        </Item>
+          <ThemeToggle />
+        </ProfileMenuItem>
         <Item
           variant="outline"
           size="sm"

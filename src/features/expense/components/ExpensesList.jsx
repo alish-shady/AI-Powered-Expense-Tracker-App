@@ -26,7 +26,7 @@ export default function ExpensesList() {
     });
   }
   return (
-    <div className="fade-bottom custom-scrollbar grid w-full gap-8 overflow-y-auto px-4">
+    <div className="fade-bottom custom-scrollbar w-full gap-8 overflow-y-auto px-4">
       <Heading as="h1">Your Expenses</Heading>
       <ItemGroup className="">
         {expenses.map((exp, i) => (

@@ -11,11 +11,11 @@ export default function Modal({ setShowForm, heading, children, input }) {
 
   return (
     <div
-      className="bg-three/50 backdrop-blur-xs animate-fade-in fixed inset-0 z-50 flex items-center justify-center"
+      className="bg-background/50 backdrop-blur-xs animate-fade-in fixed inset-0 z-50 flex items-center justify-center"
       onClick={handleBackdropClick}
     >
-      <div className="bg-three w-full max-w-md rounded-xl p-6 shadow-2xl">
-        <Heading as="h3" className="text-one font-semibold">
+      <div className="bg-background w-full max-w-md rounded-xl p-6 shadow-2xl">
+        <Heading as="h3" className="text-primary font-semibold">
           {heading}
         </Heading>
         {input}
@@ -25,7 +25,7 @@ export default function Modal({ setShowForm, heading, children, input }) {
             size="sm"
             type="button"
             onClick={() => setShowForm(false)}
-            className="border-one/30 text-one hover:bg-one/5 hover:border-one flex-1 border bg-transparent duration-200"
+            className="border-primary/30 text-primary hover:bg-primary/5 hover:border-primary flex-1 border bg-transparent duration-200"
           >
             Cancel
           </AppButton>

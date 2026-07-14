@@ -227,6 +227,8 @@
   --chart-5: #fbffe4;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -236,5 +238,18 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .no-number-spinner {
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+
+  .no-number-spinner::-webkit-inner-spin-button,
+  .no-number-spinner::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
   }
 }

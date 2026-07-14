@@ -12,7 +12,7 @@ function ItemGroup({ className, ...props }) {
       role="list"
       data-slot="item-group"
       className={cn(
-        "group/item-group has-data-[size=sm]:gap-2.5 has-data-[size=xs]:gap-2 flex w-full flex-col gap-4",
+        "group/item-group has-data-[size=sm]:gap-2.5 has-data-[size=xs]:gap-2 flex flex-col gap-4",
         className,
       )}
       {...props}

@@ -9,17 +9,13 @@ export default function HomeHeader() {
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex flex-col">
-        <span className="text-text-1/50 text-xs font-medium uppercase tracking-wider">
+        <span className="text-muted text-xs font-medium uppercase tracking-wider">
           Welcome
         </span>
-        <Heading as="h3" className="text-one leading-tight">
+        <Heading as="h3" className="text-primary leading-tight">
           {fullName}
         </Heading>
       </div>
-      <button className="bg-one/10 text-one hover:bg-one/20 relative flex items-center justify-center rounded-xl p-3 transition-all active:scale-95">
-        <IoNotificationsOutline className="text-2xl" />
-        <span className="bg-error absolute right-2.5 top-2 h-2 w-2 rounded-full ring-2 ring-white"></span>
-      </button>
     </div>
   );
 }

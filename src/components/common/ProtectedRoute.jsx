@@ -13,10 +13,10 @@ export default function ProtectedRoute({ children }) {
 
   if (isLoading) {
     return (
-      <div className="animate-custom-pulse bg-three flex h-screen w-full items-center justify-center">
+      <div className="animate-custom-pulse bg-background flex h-screen w-full items-center justify-center">
         <div className="flex flex-col items-center">
           <img src="/Logo2.png" className="size-24" />
-          <p className="text-one/60 text-sm font-medium">
+          <p className="text-primary text-sm font-medium">
             Loading your account...
           </p>
         </div>

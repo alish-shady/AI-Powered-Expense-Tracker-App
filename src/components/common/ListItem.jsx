@@ -12,6 +12,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { Link } from "react-router";
 
 function ListItem({ expense, position, onRequestDelete }) {
+  console.log({ expense });
   return (
     <Item
       variant="outline"
@@ -22,7 +23,14 @@ function ListItem({ expense, position, onRequestDelete }) {
           <span className="bg-primary-foreground/15 text-2xs flex h-7 w-7 items-center justify-center rounded-full font-bold">
             {position}
           </span>
-          <span className="truncate">{expense.category}</span>
+          <div className="flex flex-col items-start">
+            <span className="truncate">{expense.category}</span>
+            {expense.name !== expense.description ? (
+              <span className="text-2xs text-primary-foreground/65 min-w-0 truncate">
+                {expense.name}
+              </span>
+            ) : null}
+          </div>
         </ItemTitle>
 
         <ItemDescription className="text-primary-foreground/75 pl-9 text-xs font-semibold">
