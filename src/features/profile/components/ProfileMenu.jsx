@@ -13,14 +13,23 @@ import { LockKeyhole, LogOut, Mail, Palette, Trash } from "lucide-react";
 import ChangePasswordModal from "./ChangePasswordModal";
 import ThemeToggle from "./ThemeToggle";
 import DeleteAccountModal from "./DeleteAccountModal";
+import { useUser } from "../hooks/useUser";
 
 export default function ProfileMenu() {
   const { isPending, signout } = useSignout();
+  const { user } = useUser();
   const [showChangeEmail, setShowChangeEmail] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const date = new Date(user.created_at);
+  const formatted = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
   return (
-    <>
+    <div className="mt-4">
       <ItemGroup>
         <ProfileMenuItem
           onClick={signout}
@@ -59,7 +68,7 @@ export default function ProfileMenu() {
         <Item variant="outline" size="sm">
           <ItemContent>
             <ItemTitle>Member Since:</ItemTitle>
-            <ItemDescription>Description</ItemDescription>
+            <ItemDescription>{formatted}</ItemDescription>
           </ItemContent>
         </Item>
       </ItemGroup>
@@ -70,6 +79,6 @@ export default function ProfileMenu() {
       {showConfirmDelete && (
         <DeleteAccountModal setShowForm={setShowConfirmDelete} />
       )}
-    </>
+    </div>
   );
 }

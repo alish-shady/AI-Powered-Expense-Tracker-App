@@ -6,9 +6,7 @@ export default function Profile() {
   return (
     <AppLayout.Main>
       <ProfileHeader />
-      <div className="mt-4">
-        <ProfileMenu />
-      </div>
+      <ProfileMenu />
     </AppLayout.Main>
   );
 }

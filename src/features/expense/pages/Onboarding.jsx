@@ -17,7 +17,7 @@ export default function Onboarding() {
           <Heading as="h1" className="text-lg leading-tight">
             Spend Smarter With Our Expense Tracker
           </Heading>
-          <p className="text-primary-foreground/60 text-sm font-medium leading-relaxed">
+          <p className="text-muted-foreground text-sm font-medium leading-relaxed">
             Master your finances with ease. Track every penny and reach your
             financial goals faster than ever.
           </p>
@@ -34,7 +34,7 @@ export default function Onboarding() {
               Get Started
             </Button>
           </Link>
-          <p className="text-primary-foreground/70 text-2xs text-center font-semibold uppercase tracking-wide">
+          <p className="text-muted-foreground text-2xs text-center font-semibold uppercase tracking-wide">
             Already Have Account?
             <Link
               to="/login"
