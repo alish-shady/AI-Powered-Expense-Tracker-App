@@ -12,7 +12,7 @@ export function useGetExpenses(dateRange) {
     queryKey: ["expenses", dateRange],
     queryFn: ({ signal }) => getExpensesAPI({ dateRange, signal }),
     networkMode: "always",
-    enabled: Boolean(dateRange?.start && dateRange?.end),
+    // enabled: Boolean(dateRange?.start && dateRange?.end),
   });
   if (error) throw error;
   return { expenses, error, isError, isSuccess, isLoading };

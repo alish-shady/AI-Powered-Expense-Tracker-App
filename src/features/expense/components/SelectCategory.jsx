@@ -4,11 +4,17 @@ import { showError } from "@/utils/showError";
 import { useGetCategory } from "../hooks/useGetCategory";
 import { getErrorMessage, normalizeError } from "#lib/utils";
 
-export default function SelectCategory({ error, setValue, watch, register }) {
+export default function SelectCategory({
+  error,
+  setValue,
+  watch,
+  register,
+  smart = true,
+}) {
   const description = watch("description");
   const { categories, getCategories, isFetching } = useGetCategory(description);
   async function handleAIDecide() {
-    if (isFetching) return;
+    if (isFetching || !smart) return;
     const { data, error: err, isSuccess } = await getCategories();
     if (isSuccess && data.length)
       setValue("category", data[0].label, {
@@ -31,16 +37,18 @@ export default function SelectCategory({ error, setValue, watch, register }) {
         {...register("category", { required: "Please select a category" })}
       />
 
-      <AppButton
-        type="button"
-        variant="outline"
-        size="xs"
-        onClick={handleAIDecide}
-        disabled={isFetching}
-        className={`self-end ${isFetching ? "animate-custom-pulse" : ""}`}
-      >
-        {isFetching ? "Deciding..." : "Let AI decide"}
-      </AppButton>
+      {smart ? (
+        <AppButton
+          type="button"
+          variant="outline"
+          size="xs"
+          onClick={handleAIDecide}
+          disabled={isFetching}
+          className={`self-end ${isFetching ? "animate-custom-pulse" : ""}`}
+        >
+          {isFetching ? "Deciding..." : "Let AI decide"}
+        </AppButton>
+      ) : null}
     </div>
   );
 }

@@ -75,3 +75,12 @@ export function assertOnline() {
 }
 
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+export function getMonthRange(month) {
+  if (!month) return undefined;
+  const [year, monthNumber] = month.split("-").map(Number);
+  return {
+    start: new Date(Date.UTC(year, monthNumber - 1, 1)).toISOString(),
+    end: new Date(Date.UTC(year, monthNumber, 1)).toISOString(),
+  };
+}

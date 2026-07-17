@@ -1,7 +1,7 @@
+import { Spinner } from "#components/ui/spinner";
 import AppLayout from "../../../components/layout/AppLayout";
 import ExpensesList from "../components/ExpensesList";
 import { useGetExpenses } from "../hooks/useGetExpenses";
-import Spinner from "../../../components/common/Spinner";
 
 export default function Home() {
   const { expenses, isLoading } = useGetExpenses();
