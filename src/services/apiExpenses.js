@@ -15,21 +15,25 @@ export async function addExpenseAPI({ amount, category, description }) {
   return data;
 }
 
-export async function getExpensesAPI() {
+export async function getExpensesAPI({ dateRange, signal }) {
   assertOnline();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const { data: expenses, error } = await supabase
+  let query = supabase
     .from("expenses")
     .select("*")
     .eq("user_id", user.id)
-    .order("created_at");
-
+    .order("created_at", { ascending: true })
+    .abortSignal(signal);
+  if (dateRange) {
+    const { start, end } = dateRange;
+    query = query.gte("created_at", start).lt("created_at", end);
+  }
+  const { data: expenses, error } = await query;
   if (error) {
     throw error;
   }
-
   return expenses;
 }
 

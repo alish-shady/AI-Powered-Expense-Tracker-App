@@ -18,6 +18,7 @@ import RouteErrorBoundary from "#components/layout/RouteErrorBoundary";
 import RouteNotFound from "#components/layout/RouteNotFound";
 import Dashboard from "@/features/dashboard/pages/Dashboard";
 import DashboardHeader from "@/features/dashboard/components/DashboardHeader";
+import BudgetsAndGoals from "@/features/budgets&goals/pages/BudgetsAndGoals";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
             path: "expenses/:expenseId",
             element: <EditExpense />,
             handle: { header: EditExpenseHeader },
+          },
+          {
+            path: "budgets-and-goals",
+            element: <BudgetsAndGoals />,
           },
           {
             path: "profile",

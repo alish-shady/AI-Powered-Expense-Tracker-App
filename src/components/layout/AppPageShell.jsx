@@ -11,7 +11,7 @@ import {
 const navItems = [
   { icon: HiOutlineHome, label: "home" },
   { icon: HiOutlineChartPie, label: "dashboard" },
-  { icon: HiOutlineWallet, label: "wallet" },
+  { icon: HiOutlineWallet, label: "budgets-and-goals" },
   { icon: HiOutlineUser, label: "profile" },
 ];
 

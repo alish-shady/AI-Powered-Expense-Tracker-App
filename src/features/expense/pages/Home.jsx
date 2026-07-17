@@ -4,7 +4,7 @@ import { useGetExpenses } from "../hooks/useGetExpenses";
 import Spinner from "../../../components/common/Spinner";
 
 export default function Home() {
-  const { expenses, error, isLoading } = useGetExpenses();
+  const { expenses, isLoading } = useGetExpenses();
 
   if (isLoading) return <Spinner />;
   return (
