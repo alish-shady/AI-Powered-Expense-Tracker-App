@@ -1,8 +1,6 @@
-import { forwardRef, useRef, useState } from "react";
-import { IoChevronDownOutline } from "react-icons/io5";
-
+import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import { IoChevronDownOutline, IoSearchOutline } from "react-icons/io5";
 import FormField from "./FormField";
-
 const Select = forwardRef(function Select(
   {
     options = [],
@@ -15,14 +13,33 @@ const Select = forwardRef(function Select(
     value,
     ...props
   },
-  ref,
+  forwardedRef,
 ) {
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
   const containerRef = useRef(null);
+  const triggerRef = useRef(null);
+  const searchInputRef = useRef(null);
 
   const watchedValue = watch?.(name);
   const selected = value ?? watchedValue;
-  const hasSelection = selected !== undefined && selected !== "";
+
+  const hasSelection =
+    selected !== undefined && selected !== null && selected !== "";
+
+  const selectedLabel = hasSelection ? selected : "Select an option";
+
+  const filteredOptions = useMemo(() => {
+    const query = search.trim().toLocaleLowerCase();
+
+    if (!query) {
+      return options;
+    }
+
+    return options.filter((option) =>
+      String(option).toLocaleLowerCase().includes(query),
+    );
+  }, [options, search]);
 
   const baseStyles = [
     "w-full cursor-pointer rounded-xl border border-input",
@@ -39,7 +56,38 @@ const Select = forwardRef(function Select(
     "aria-invalid:ring-2 aria-invalid:ring-destructive/20",
   ].join(" ");
 
-  const selectedLabel = hasSelection ? selected : "Select an option";
+  function assignRefs(element) {
+    triggerRef.current = element;
+
+    if (typeof forwardedRef === "function") {
+      forwardedRef(element);
+    } else if (forwardedRef) {
+      forwardedRef.current = element;
+    }
+  }
+
+  function openDropdown() {
+    setOpen(true);
+  }
+
+  function closeDropdown({ returnFocus = false } = {}) {
+    setOpen(false);
+    setSearch("");
+
+    if (returnFocus) {
+      requestAnimationFrame(() => {
+        triggerRef.current?.focus();
+      });
+    }
+  }
+
+  function toggleDropdown() {
+    if (open) {
+      closeDropdown();
+    } else {
+      openDropdown();
+    }
+  }
 
   function handleSelect(option) {
     setValue?.(name, option, {
@@ -48,20 +96,66 @@ const Select = forwardRef(function Select(
       shouldValidate: true,
     });
 
-    setOpen(false);
+    closeDropdown({ returnFocus: true });
   }
+
+  function handleTriggerKeyDown(event) {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      openDropdown();
+    }
+
+    if (event.key === "Escape") {
+      closeDropdown();
+    }
+  }
+
+  function handleDropdownKeyDown(event) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeDropdown({ returnFocus: true });
+    }
+  }
+
+  useEffect(() => {
+    if (!open) return;
+
+    const animationFrame = requestAnimationFrame(() => {
+      searchInputRef.current?.focus();
+    });
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [open]);
+
+  useEffect(() => {
+    function handleOutsideClick(event) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        closeDropdown();
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <FormField label={label} error={error}>
       <div ref={containerRef} className="relative">
         <button
           {...props}
-          ref={ref}
+          ref={assignRefs}
           type="button"
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-invalid={Boolean(error)}
-          onClick={() => setOpen((current) => !current)}
+          onClick={toggleDropdown}
+          onKeyDown={handleTriggerKeyDown}
           className={`${baseStyles} flex items-center justify-between gap-2 ${className}`}
         >
           <span
@@ -83,11 +177,10 @@ const Select = forwardRef(function Select(
         </button>
 
         <div
-          role="listbox"
-          aria-label={label}
+          onKeyDown={handleDropdownKeyDown}
           className={[
-            "absolute z-50 mt-2 w-full origin-top",
-            "border-border max-h-60 overflow-y-auto rounded-xl border",
+            "absolute z-50 mt-2 w-full origin-top overflow-hidden",
+            "border-border rounded-xl border",
             "bg-popover text-popover-foreground shadow-lg",
             "transition-all duration-200",
             open
@@ -95,38 +188,76 @@ const Select = forwardRef(function Select(
               : "pointer-events-none -translate-y-2 opacity-0",
           ].join(" ")}
         >
-          {options.map((option) => {
-            const isSelected = option === selected;
+          <div className="border-border border-b p-2">
+            <div className="relative">
+              <IoSearchOutline
+                aria-hidden="true"
+                className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2"
+              />
 
-            return (
-              <button
-                key={option}
-                type="button"
-                role="option"
-                aria-selected={isSelected}
-                onClick={() => handleSelect(option)}
+              <input
+                ref={searchInputRef}
+                type="search"
+                role="searchbox"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Search options..."
+                autoComplete="off"
                 className={[
-                  "w-full cursor-pointer px-4 py-3 text-left text-xs",
-                  "transition-colors",
-                  "hover:bg-accent hover:text-accent-foreground",
-                  "focus-visible:bg-accent",
-                  "focus-visible:text-accent-foreground",
-                  "focus-visible:outline-none",
-                  isSelected
-                    ? "bg-accent text-accent-foreground"
-                    : "text-popover-foreground",
+                  "border-input w-full rounded-lg border",
+                  "bg-background py-2.5 pl-9 pr-3 text-xs",
+                  "text-foreground outline-none",
+                  "placeholder:text-muted-foreground",
+                  "focus:border-ring focus:ring-ring/30 focus:ring-2",
                 ].join(" ")}
-              >
-                {option}
-              </button>
-            );
-          })}
-
-          {options.length === 0 && (
-            <div className="text-muted-foreground px-4 py-3 text-xs">
-              No options available
+              />
             </div>
-          )}
+          </div>
+
+          <div
+            role="listbox"
+            aria-label={label}
+            className="max-h-60 overflow-y-auto py-1"
+          >
+            {filteredOptions.map((option) => {
+              const isSelected = option === selected;
+
+              return (
+                <button
+                  key={String(option)}
+                  type="button"
+                  role="option"
+                  aria-selected={isSelected}
+                  onClick={() => handleSelect(option)}
+                  className={[
+                    "w-full cursor-pointer px-4 py-3 text-left text-xs",
+                    "transition-colors",
+                    "hover:bg-accent hover:text-accent-foreground",
+                    "focus-visible:bg-accent",
+                    "focus-visible:text-accent-foreground",
+                    "focus-visible:outline-none",
+                    isSelected
+                      ? "bg-accent text-accent-foreground"
+                      : "text-popover-foreground",
+                  ].join(" ")}
+                >
+                  {option}
+                </button>
+              );
+            })}
+
+            {options.length === 0 && (
+              <div className="text-muted-foreground px-4 py-3 text-xs">
+                No options available
+              </div>
+            )}
+
+            {options.length > 0 && filteredOptions.length === 0 && (
+              <div className="text-muted-foreground px-4 py-3 text-xs">
+                No options match “{search}”
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </FormField>

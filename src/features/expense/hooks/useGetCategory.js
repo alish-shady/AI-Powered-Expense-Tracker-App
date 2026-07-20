@@ -1,28 +1,6 @@
+import { fallbackCategories } from "#lib/utils";
 import { getSmartCategories } from "@/services/apiCategories";
 import { useQuery } from "@tanstack/react-query";
-
-const fallbackCategories = [
-  "Transport",
-  "Shopping",
-  "Entertainment",
-  "Health",
-  "Other",
-  "Housing",
-  "Utilities",
-  "Groceries",
-  "Dining Out",
-  "Education",
-  "Travel",
-  "Insurance",
-  "Subscriptions",
-  "Personal Care",
-  "Clothing",
-  "Pets",
-  "Gifts",
-  "Debt Payments",
-  "Savings",
-  "Taxes",
-];
 
 export function useGetCategory(description) {
   const {

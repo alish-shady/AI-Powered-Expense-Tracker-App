@@ -21,7 +21,7 @@ export default function ProfileMenu() {
   const [showChangeEmail, setShowChangeEmail] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const date = new Date(user.created_at);
+  const date = new Date(user?.created_at);
   const formatted = new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",

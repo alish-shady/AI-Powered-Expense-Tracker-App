@@ -2,7 +2,11 @@ import AppButton from "#components/common/AppButton";
 import Select from "#components/common/Select";
 import { showError } from "@/utils/showError";
 import { useGetCategory } from "../hooks/useGetCategory";
-import { getErrorMessage, normalizeError } from "#lib/utils";
+import {
+  fallbackCategories,
+  getErrorMessage,
+  normalizeError,
+} from "#lib/utils";
 
 export default function SelectCategory({
   error,
@@ -30,7 +34,7 @@ export default function SelectCategory({
     <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,70%)_minmax(0,1fr)]">
       <Select
         label="Category"
-        options={categories}
+        options={smart ? categories : fallbackCategories}
         error={error}
         setValue={setValue}
         watch={watch}

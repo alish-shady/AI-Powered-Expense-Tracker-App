@@ -11,7 +11,13 @@ import {
 import { Progress, ProgressValue } from "#components/ui/progress";
 import { PencilLine } from "lucide-react";
 
-export default function PerCategoryCard({ children, value = "loading" }) {
+export default function PerCategoryCard({
+  children,
+  value = "loading",
+  budget,
+  expense,
+  fraction,
+}) {
   return (
     <Card className="h-28 w-full py-4">
       <CardHeader className="gap-2">
@@ -26,8 +32,10 @@ export default function PerCategoryCard({ children, value = "loading" }) {
           </AppButton>
         </CardTitle>
         <CardDescription>
-          <Progress value={55} className="text-xs">
-            <span>$40 of $80</span>
+          <Progress value={fraction} className="text-xs">
+            <span>
+              ${expense} of ${budget}
+            </span>
             <ProgressValue />
           </Progress>
         </CardDescription>

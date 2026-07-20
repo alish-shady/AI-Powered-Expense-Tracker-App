@@ -14,6 +14,7 @@ export function useGetBudgets(dateRange) {
     networkMode: "always",
     // enabled: Boolean(dateRange?.start && dateRange?.end),
   });
+  console.log({ budgets, isError });
   if (error) throw error;
   return { budgets, error, isError, isSuccess, isLoading };
 }
