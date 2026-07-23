@@ -19,6 +19,8 @@ import RouteNotFound from "#components/layout/RouteNotFound";
 import Dashboard from "@/features/dashboard/pages/Dashboard";
 import DashboardHeader from "@/features/dashboard/components/DashboardHeader";
 import BudgetsAndGoals from "@/features/budgets&goals/pages/BudgetsAndGoals";
+import BudgetsAndGoalsHeader from "@/features/budgets&goals/components/BudgetAndGoalsHeader";
+import ProfileHeader from "@/features/profile/components/ProfileHeader";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -81,10 +83,12 @@ const router = createBrowserRouter([
           {
             path: "budgets-and-goals",
             element: <BudgetsAndGoals />,
+            handle: { header: BudgetsAndGoalsHeader },
           },
           {
             path: "profile",
             element: <Profile />,
+            handle: { header: ProfileHeader },
           },
         ],
       },

@@ -8,7 +8,7 @@ export default function AppLayout({ children }) {
 
 AppLayout.Main = function ({ children }) {
   return (
-    <main className="min-h-0 w-full grow overflow-y-auto p-6">
+    <main className="custom-scrollbar min-h-0 w-full grow overflow-y-auto p-6">
       <div className="mx-auto flex flex-col xl:w-full">{children}</div>
     </main>
   );

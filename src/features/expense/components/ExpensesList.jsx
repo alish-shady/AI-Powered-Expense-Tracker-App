@@ -1,13 +1,11 @@
-import { useState } from "react";
 import Heading from "../../../components/common/Heading";
 import ListItem from "../../../components/common/ListItem";
 import { useGetExpenses } from "../hooks/useGetExpenses";
 import { ItemGroup } from "#components/ui/item";
-import ConfirmDeleteExpense from "./ConfirmDeleteExpense";
 export default function ExpensesList() {
   const { expenses } = useGetExpenses();
   return (
-    <div className="fade-bottom custom-scrollbar w-full gap-8 overflow-y-auto px-4">
+    <div className="fade-bottom w-full gap-8 px-4">
       <Heading as="h1">Your Expenses</Heading>
       <ItemGroup className="">
         {expenses.map((exp, i) => (

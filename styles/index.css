@@ -73,6 +73,11 @@
   animation-name: slide-in-from-bottom;
 }
 
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-secondary) transparent;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
