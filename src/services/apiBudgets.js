@@ -5,7 +5,11 @@ export async function addBudgetAPI({ category, amount }) {
   assertOnline();
   const {
     data: { user },
+    error: userError,
   } = await supabase.auth.getUser();
+  if (userError) {
+    throw userError;
+  }
   const { data, error } = await supabase
     .from("budgets")
     .insert([{ category, amount, user_id: user.id }])
@@ -13,7 +17,7 @@ export async function addBudgetAPI({ category, amount }) {
   if (error) throw error;
   return data;
 }
-export async function getBudgetsAPI({ dateRange, signal }) {
+export async function getBudgetsAPI() {
   assertOnline();
   const {
     data: { user },
@@ -25,18 +29,14 @@ export async function getBudgetsAPI({ dateRange, signal }) {
   if (!user) {
     throw new Error("User is not authenticated.");
   }
-  let query = supabase
+
+  const { data: budgets = [], error } = await supabase
     .from("budgets")
     .select("*")
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .order("id", { ascending: false });
 
-  if (dateRange) {
-    const { start, end } = dateRange;
-    query = query.gte("created_at", start).lt("created_at", end);
-  }
-  const { data: budgets = [], error } = await query.abortSignal(signal);
   if (error) {
     throw error;
   }
@@ -49,4 +49,26 @@ export async function getBudgetsAPI({ dateRange, signal }) {
     seenCategories.add(category);
     return true;
   });
+}
+
+export async function deleteBudgetAPI(category) {
+  console.log(category);
+  assertOnline();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+  if (userError) {
+    throw userError;
+  }
+
+  const { error } = await supabase
+    .from("budgets")
+    .delete()
+    .eq("user_id", user.id)
+    .eq("category", category);
+
+  if (error) throw error;
+
+  return true;
 }

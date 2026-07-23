@@ -1,7 +1,7 @@
 import { getBudgetsAPI } from "@/services/apiBudgets";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetBudgets(dateRange) {
+export function useGetBudgets() {
   const {
     data: budgets = [],
     error,
@@ -9,12 +9,10 @@ export function useGetBudgets(dateRange) {
     isSuccess,
     isLoading,
   } = useQuery({
-    queryKey: ["budgets", dateRange],
-    queryFn: ({ signal }) => getBudgetsAPI({ dateRange, signal }),
+    queryKey: ["budgets"],
+    queryFn: () => getBudgetsAPI(),
     networkMode: "always",
-    // enabled: Boolean(dateRange?.start && dateRange?.end),
   });
-  console.log({ budgets, isError });
   if (error) throw error;
   return { budgets, error, isError, isSuccess, isLoading };
 }

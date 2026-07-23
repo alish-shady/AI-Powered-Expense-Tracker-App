@@ -5,7 +5,7 @@ import { addExpenseAPI, updateExpenseAPI } from "@/services/apiExpenses";
 import { useNavigate } from "react-router";
 import { getExpenseName } from "@/services/apiExpenseName";
 
-export function useAddExpense() {
+export function useAddExpense(dateRange) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   async function generateAndAssignName({ description, category, id }) {
@@ -47,8 +47,11 @@ export function useAddExpense() {
       showError(errorMessage);
     },
     onSuccess: (data) => {
-      queryClient.setQueryData(["expenses"], (e) => [...e, ...data]);
+      queryClient.setQueryData(["expenses", dateRange], (e) =>
+        e?.length ? [...e, ...data] : [],
+      );
       void generateAndAssignName(...data);
+      queryClient.invalidateQueries({ queryKey: ["expenses", dateRange] });
       navigate("/app/home");
     },
   });

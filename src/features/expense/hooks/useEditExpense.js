@@ -4,7 +4,7 @@ import { getErrorMessage, normalizeError } from "#lib/utils";
 import { showError } from "@/utils/showError";
 import { updateExpenseAPI } from "@/services/apiExpenses";
 
-export function useEditExpense() {
+export function useEditExpense(dateRange) {
   const queryClient = useQueryClient();
   const { expenseId } = useParams();
   const {
@@ -21,7 +21,7 @@ export function useEditExpense() {
       showError(errorMessage);
     },
     onMutate: (data) => {
-      queryClient.setQueryData(["expenses"], (cur) => {
+      queryClient.setQueryData(["expenses", dateRange], (cur) => {
         return cur.map((exp) => {
           if (exp.id === data.id) return data;
           return exp;

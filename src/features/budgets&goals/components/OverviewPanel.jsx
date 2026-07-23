@@ -83,7 +83,11 @@ export default function OverviewPanel() {
         {isLoading ? (
           <Skeleton className="h-4 w-1/2" />
         ) : (
-          <span>{overviewData.fraction}% of monthly budget used</span>
+          <span>
+            {overviewData.fraction === 0
+              ? "No budget is set!"
+              : `${overviewData.fraction}% of monthly budget used`}
+          </span>
         )}
       </CardFooter>
     </Card>

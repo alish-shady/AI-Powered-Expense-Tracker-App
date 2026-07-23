@@ -3,9 +3,6 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardAction,
-  CardContent,
-  CardFooter,
 } from "#components/ui/card";
 
 export default function StatCard({ children, value = "loading" }) {

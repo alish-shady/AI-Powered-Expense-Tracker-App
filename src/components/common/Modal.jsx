@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import AppButton from "./AppButton";
 import Heading from "./Heading";
-import { EMAIL_REGEX } from "#lib/utils";
 
 export default function Modal({ setShowForm, heading, children, input }) {
   function handleBackdropClick(e) {

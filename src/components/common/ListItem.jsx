@@ -6,12 +6,14 @@ import {
   ItemHeader,
   ItemTitle,
 } from "#components/ui/item";
-import React from "react";
+import ConfirmDeleteExpense from "@/features/expense/components/ConfirmDeleteExpense";
+import React, { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
 import { Link } from "react-router";
 
-function ListItem({ expense, position, onRequestDelete }) {
+function ListItem({ expense, position }) {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   return (
     <Item
       variant="outline"
@@ -56,13 +58,21 @@ function ListItem({ expense, position, onRequestDelete }) {
           </Link>
 
           <span
-            onClick={onRequestDelete}
+            onClick={() => {
+              setShowDeleteModal(true);
+            }}
             className="bg-primary-foreground/10 text-primary-foreground hover:bg-destructive/15 hover:text-destructive flex h-9 w-9 cursor-pointer items-center justify-center rounded-full transition-all duration-200 hover:scale-105"
           >
             <MdDeleteOutline />
           </span>
         </ItemActions>
       </ItemContent>
+      {showDeleteModal && (
+        <ConfirmDeleteExpense
+          setShowDeleteForm={setShowDeleteModal}
+          selectedExpenseId={expense.id}
+        />
+      )}
     </Item>
   );
 }

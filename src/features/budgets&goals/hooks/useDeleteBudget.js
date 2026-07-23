@@ -1,28 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getErrorMessage, normalizeError } from "#lib/utils";
 import { showError } from "@/utils/showError";
-import { addBudgetAPI } from "@/services/apiBudgets";
+import { deleteBudgetAPI } from "@/services/apiBudgets";
 
-export function useAddBudget() {
+export function useDeleteBudget() {
   const queryClient = useQueryClient();
   const {
-    data,
-    isSuccess,
+    mutate: deleteBudget,
+    error,
     isPending,
-    mutate: addBudget,
+    isSuccess,
   } = useMutation({
-    mutationFn: addBudgetAPI,
+    mutationFn: deleteBudgetAPI,
     networkMode: "always",
     onError: (err) => {
       const error = normalizeError(err);
       const errorMessage = getErrorMessage(error);
       showError(errorMessage);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["budgets"],
+    onMutate: (data) => {
+      queryClient.setQueryData(["budgets"], (cur) => {
+        return cur.filter((bud) => bud.category !== data);
       });
+      queryClient.invalidateQueries({ queryKey: ["budgets"] });
     },
   });
-  return { data, isPending, isSuccess, addBudget };
+
+  return { deleteBudget, error, isPending, isSuccess };
 }

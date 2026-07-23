@@ -4,22 +4,21 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardAction,
-  CardContent,
-  CardFooter,
 } from "#components/ui/card";
 import { Progress, ProgressValue } from "#components/ui/progress";
-import { PencilLine } from "lucide-react";
+import { Trash2 } from "lucide-react";
+import { useState } from "react";
+import ConfirmDeleteBudget from "./ConfirmDeleteBudget";
 
 export default function PerCategoryCard({
   children,
-  value = "loading",
   budget,
   expense,
   fraction,
 }) {
+  const [showForm, setShowForm] = useState(false);
   return (
-    <Card className="h-28 w-full py-4">
+    <Card className="h-32 w-full py-4">
       <CardHeader className="gap-2">
         <CardTitle className="flex items-center justify-between">
           {children}
@@ -27,19 +26,32 @@ export default function PerCategoryCard({
             size="xs"
             variant="filled"
             className="flex size-6 min-w-fit"
+            onClick={() => {
+              setShowForm(true);
+            }}
           >
-            <PencilLine className="size-3" />
+            <Trash2 className="size-3" />
           </AppButton>
         </CardTitle>
         <CardDescription>
           <Progress value={fraction} className="text-xs">
-            <span>
-              ${expense} of ${budget}
-            </span>
-            <ProgressValue />
+            <div className="flex w-full flex-nowrap justify-between">
+              <span>
+                ${expense} of ${budget}
+              </span>
+              <span>
+                (<ProgressValue />)
+              </span>
+            </div>
           </Progress>
         </CardDescription>
       </CardHeader>
+      {showForm && (
+        <ConfirmDeleteBudget
+          setShowDeleteForm={setShowForm}
+          selectedBudgetCategory={children}
+        />
+      )}
     </Card>
   );
 }

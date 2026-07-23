@@ -9,7 +9,7 @@ export function useBudgetCardGroupData() {
   const currentMonth = searchParams.get("month");
   const dateRange = getMonthRange(currentMonth);
   const { expenses, isLoading: expensesLoading } = useGetExpenses(dateRange);
-  const { budgets, isLoading: budgetsLoading } = useGetBudgets(null);
+  const { budgets, isLoading: budgetsLoading } = useGetBudgets();
   const budgetCardsData = useMemo(() => {
     const budgetsPerCategory = budgets.map((budget) => {
       const expenseAmount = expenses.reduce(

@@ -9,12 +9,15 @@ export function useOverviewPanelData() {
   const currentMonth = searchParams.get("month");
   const dateRange = getMonthRange(currentMonth);
   const { expenses, isLoading: expensesLoading } = useGetExpenses(dateRange);
-  const { budgets, isLoading: budgetsLoading } = useGetBudgets(dateRange);
+  const { budgets, isLoading: budgetsLoading } = useGetBudgets();
   const overviewData = useMemo(() => {
     const totalSpent = expenses.reduce((acc, exp) => acc + exp.amount, 0);
     const totalBudget = budgets.reduce((acc, bud) => acc + bud.amount, 0);
     const remaining = totalBudget - totalSpent;
-    const fraction = Math.round((totalSpent / totalBudget) * 100);
+    const fraction =
+      totalBudget > 0
+        ? Number(((totalSpent / totalBudget) * 100).toFixed(1))
+        : 0;
     return {
       totalSpent,
       remaining,

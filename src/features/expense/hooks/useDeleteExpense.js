@@ -3,7 +3,7 @@ import { getErrorMessage, normalizeError } from "#lib/utils";
 import { showError } from "@/utils/showError";
 import { deleteExpenseAPI } from "@/services/apiExpenses";
 
-export function useDeleteExpense() {
+export function useDeleteExpense(dateRange) {
   const queryClient = useQueryClient();
   const {
     mutate: deleteExpense,
@@ -19,7 +19,7 @@ export function useDeleteExpense() {
       showError(errorMessage);
     },
     onMutate: (data) => {
-      queryClient.setQueryData(["expenses"], (cur) => {
+      queryClient.setQueryData(["expenses", dateRange], (cur) => {
         return cur.filter((exp) => exp.id !== data);
       });
     },

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { useDeleteExpense } from "../hooks/useDeleteExpense";
 import AppButton from "#components/common/AppButton";
 import Modal from "#components/common/Modal";
 import { createPortal } from "react-dom";
-export default function ConfirmDeleteExpense({
+import { useDeleteBudget } from "../hooks/useDeleteBudget";
+export default function ConfirmDeleteBudget({
   setShowDeleteForm,
-  selectedExpenseId,
+  selectedBudgetCategory,
 }) {
-  const { deleteExpense, error, isPending, isSuccess } = useDeleteExpense();
+  const { deleteBudget, error, isPending, isSuccess } = useDeleteBudget();
 
   useEffect(() => {
     if (isSuccess && !error) {
@@ -15,13 +15,13 @@ export default function ConfirmDeleteExpense({
     }
   }, [isSuccess, setShowDeleteForm, error]);
   function handleClick() {
-    if (!selectedExpenseId) return;
-    deleteExpense(selectedExpenseId);
+    if (!selectedBudgetCategory) return;
+    deleteBudget(selectedBudgetCategory);
   }
 
   return createPortal(
     <Modal
-      heading="Are You Sure You Want To Delete This Expense?"
+      heading="Are You Sure You Want To Delete This Budget?"
       setShowForm={setShowDeleteForm}
     >
       <AppButton
