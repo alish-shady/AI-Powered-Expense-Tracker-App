@@ -153,11 +153,43 @@ export function assertOnline() {
 
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-export function getMonthRange(month) {
-  if (!month) return undefined;
-  const [year, monthNumber] = month.split("-").map(Number);
-  return {
-    start: new Date(Date.UTC(year, monthNumber - 1, 1)).toISOString(),
-    end: new Date(Date.UTC(year, monthNumber, 1)).toISOString(),
-  };
+export function getDateRange(range) {
+  if (!range) return undefined;
+  const now = new Date();
+  if (/^\d{4}-\d{2}$/.test(range)) {
+    const [year, month] = range.split("-").map(Number);
+    return {
+      start: new Date(Date.UTC(year, month - 1, 1)).toISOString(),
+      end: new Date(Date.UTC(year, month, 1)).toISOString(),
+    };
+  }
+  switch (range) {
+    case "thisMonth":
+      return {
+        start: new Date(
+          Date.UTC(now.getFullYear(), now.getMonth(), 1),
+        ).toISOString(),
+        end: now.toISOString(),
+      };
+    case "lastMonth":
+      return {
+        start: new Date(
+          Date.UTC(now.getFullYear(), now.getMonth() - 1, 1),
+        ).toISOString(),
+        end: new Date(
+          Date.UTC(now.getFullYear(), now.getMonth(), 1),
+        ).toISOString(),
+      };
+    case "last3Months":
+      return {
+        start: new Date(
+          Date.UTC(now.getFullYear(), now.getMonth() - 3, now.getDate()),
+        ).toISOString(),
+        end: now.toISOString(),
+      };
+    case "allTime":
+      return null;
+    default:
+      return undefined;
+  }
 }

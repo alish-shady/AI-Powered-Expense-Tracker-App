@@ -1,11 +1,13 @@
 import { Spinner } from "#components/ui/spinner";
 import AppLayout from "../../../components/layout/AppLayout";
 import ExpensesList from "../components/ExpensesList";
+import { useFilter } from "../hooks/useFilter";
 import { useGetExpenses } from "../hooks/useGetExpenses";
 
 export default function Home() {
-  const { expenses, isLoading } = useGetExpenses();
-
+  const { date } = useFilter();
+  console.log(date);
+  const { expenses, isLoading } = useGetExpenses(date);
   if (isLoading) return <Spinner />;
   return (
     <AppLayout.Main>

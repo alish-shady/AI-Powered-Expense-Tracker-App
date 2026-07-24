@@ -14,6 +14,7 @@ import Heading from "#components/common/Heading";
 import { CategoryCheckboxGroup } from "./CategoryCheckboxGroup";
 import DateRangeChips from "./DateRangeChips";
 import { FormProvider, useForm } from "react-hook-form";
+import { useSearchParams } from "react-router";
 
 export function FilterSheet() {
   const {
@@ -24,10 +25,31 @@ export function FilterSheet() {
   } = useForm({
     defaultValues: {
       categories: [],
+      dateRange: "thisMonth",
     },
   });
+  const [searchParams, setSearchParams] = useSearchParams();
   function onSubmit(value) {
-    console.log(value);
+    const { categories, dateRange, descriptionOrName, maxAmount, minAmount } =
+      value;
+    setSearchParams((searchParams) => {
+      if (descriptionOrName) {
+        searchParams.set("search", descriptionOrName);
+      }
+      if (categories.length) {
+        searchParams.set("categories", categories);
+      }
+      if (dateRange) {
+        searchParams.set("dateRange", dateRange);
+      }
+      if (minAmount) {
+        searchParams.set("minAmount", String(minAmount));
+      }
+      if (maxAmount) {
+        searchParams.set("maxAmount", String(maxAmount));
+      }
+      return searchParams;
+    });
   }
   return (
     <div className="flex flex-wrap gap-2">
@@ -60,7 +82,12 @@ export function FilterSheet() {
                 label="Name or description"
                 // disabled={isPending}
                 error={errors.descriptionOrName}
-                {...register("descriptionOrName")}
+                {...register("descriptionOrName", {
+                  maxLength: {
+                    value: 200,
+                    message: "Max 200 characters.",
+                  },
+                })}
               />
               <div className="flex flex-col gap-2">
                 <Heading as="h2" size="h5" className="font-medium">
@@ -84,11 +111,10 @@ export function FilterSheet() {
                     label="None"
                     placeholder="Min"
                     {...register("minAmount", {
-                      valueAsNumber: true,
                       min: { value: 0, message: "Must be positive." },
-                      maxLength: {
-                        value: 15,
-                        message: "Must be less than 15 digits.",
+                      max: {
+                        value: 99999999999999,
+                        message: "Maximum 15 digits.",
                       },
                     })}
                   />
@@ -98,11 +124,10 @@ export function FilterSheet() {
                     label="None"
                     placeholder="Max"
                     {...register("maxAmount", {
-                      valueAsNumber: true,
                       min: { value: 0, message: "Must be positive." },
-                      maxLength: {
-                        value: 15,
-                        message: "Must be less than 15 digits.",
+                      max: {
+                        value: 99999999999999,
+                        message: "Max 15 digits.",
                       },
                     })}
                   />

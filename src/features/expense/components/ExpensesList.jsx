@@ -3,9 +3,11 @@ import ListItem from "../../../components/common/ListItem";
 import { useGetExpenses } from "../hooks/useGetExpenses";
 import { ItemGroup } from "#components/ui/item";
 import { FilterSheet } from "./FilterSheet";
+import { useFilter } from "../hooks/useFilter";
 
 export default function ExpensesList() {
-  const { expenses } = useGetExpenses();
+  const { date } = useFilter();
+  const { expenses } = useGetExpenses(date);
   return (
     <div className="fade-bottom w-full px-4">
       <Heading as="h1">Your Expenses</Heading>

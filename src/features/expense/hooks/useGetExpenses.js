@@ -1,7 +1,7 @@
 import { getExpensesAPI } from "@/services/apiExpenses";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetExpenses(dateRange) {
+export function useGetExpenses({ dateRange, period }) {
   const {
     data: expenses = [],
     error,
@@ -9,7 +9,7 @@ export function useGetExpenses(dateRange) {
     isSuccess,
     isLoading,
   } = useQuery({
-    queryKey: ["expenses", dateRange],
+    queryKey: ["expenses", period],
     queryFn: ({ signal }) => getExpensesAPI({ dateRange, signal }),
     networkMode: "always",
     // enabled: Boolean(dateRange?.start && dateRange?.end),

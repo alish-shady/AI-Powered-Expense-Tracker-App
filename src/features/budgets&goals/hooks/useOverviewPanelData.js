@@ -2,12 +2,12 @@ import { useGetExpenses } from "@/features/expense/hooks/useGetExpenses";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { useGetBudgets } from "./useGetBudgets";
-import { getMonthRange } from "#lib/utils";
+import { getDateRange } from "#lib/utils";
 
 export function useOverviewPanelData() {
   const [searchParams] = useSearchParams();
   const currentMonth = searchParams.get("month");
-  const dateRange = getMonthRange(currentMonth);
+  const dateRange = getDateRange(currentMonth);
   const { expenses, isLoading: expensesLoading } = useGetExpenses(dateRange);
   const { budgets, isLoading: budgetsLoading } = useGetBudgets();
   const overviewData = useMemo(() => {
