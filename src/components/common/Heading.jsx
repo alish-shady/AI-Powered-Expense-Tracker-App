@@ -7,7 +7,7 @@ export default function Heading({
 }) {
   const styles = {
     h1: "font-bold text-primary tracking-tight",
-    h2: "font-semibold text-primary",
+    h2: "font-medium text-primary",
     h3: "font-medium text-secondary",
     h4: "font-medium text-primary-foreground",
     h5: "font-semibold text-primary-foreground",

@@ -21,7 +21,7 @@
   --text-lg: 39px;
   --text-xl: 48px;
 
-  --breakpoint-xs: 30rem;
+  --breakpoint-xs: 28rem;
   @keyframes custom-pulse {
     0%,
     100% {
