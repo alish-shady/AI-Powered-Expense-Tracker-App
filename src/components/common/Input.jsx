@@ -12,6 +12,7 @@ const Input = forwardRef(function Input(
     onChange,
     setter,
     className = "",
+    placeholder = "",
     ...props
   },
   ref,
@@ -83,7 +84,7 @@ const Input = forwardRef(function Input(
           className={`${commonProps.className} resize-none`}
         />
       ) : (
-        <input {...commonProps} type={inputType} />
+        <input {...commonProps} type={inputType} placeholder={placeholder} />
       )}
 
       {isPassword && (

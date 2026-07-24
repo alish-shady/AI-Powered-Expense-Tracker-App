@@ -87,6 +87,10 @@
   border-radius: 999px;
 }
 
+.scrollbar-none::-webkit-scrollbar {
+  width: 0px;
+}
+
 @theme inline {
   --font-sans: "Nunito Variable", sans-serif;
   --font-heading: "Nunito Variable", sans-serif;
